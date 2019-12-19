@@ -238,7 +238,7 @@ theme_config:
     gitment_owner: xiaoquqi      #你的 GitHub ID
     # 是否使用官方js(false可以提升访问速度，本地修改过一部分的js，官方js可能会出现服务器不稳定，不太建议使用)
     gitment_remote: false
-    gitment_repo: 'mynewblog'          #存储评论的 repo name(需要在Github创建)
+    gitment_repo: 'my-hexo-blog'          #存储评论的 repo name(需要在Github创建)
     gitment_oauth:
       client_id: '9746adc8cc5b8dbd7123'           #client ID
       client_secret: 'ca12fc15ccd81c468e372e3cda8272ce68eaac5a'       #client secret

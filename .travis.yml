@@ -11,6 +11,8 @@ before_install:
 script:
   - hexo generate # generate static files
 deploy:
+  repo: xiaoquqi/xiaoquqi.github.io
+  target_branch: master
   provider: pages
   skip-cleanup: true
   github-token: $GH_TOKEN

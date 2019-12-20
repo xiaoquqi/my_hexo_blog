@@ -10,6 +10,9 @@ before_install:
   - git clone --depth=1 https://github.com/JoeyBling/hexo-theme-yilia-plus.git themes/yilia-plus
 script:
   - hexo generate # generate static files
+# Generate CNAME
+after_install:
+  - echo "sunqi.me" > public/CNAME
 deploy:
   repo: xiaoquqi/xiaoquqi.github.io
   target_branch: master

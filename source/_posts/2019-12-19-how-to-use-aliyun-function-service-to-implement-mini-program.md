@@ -1,7 +1,7 @@
 ---
 title: 使用阿里云函数计算构建小程序
 date: 2019-12-19 23:19:16
-tags: 阿里云, Cloud Computing, Serverless
+tags: [阿里云, Cloud Computing, Serverless]
 ---
 
 # 1、需求

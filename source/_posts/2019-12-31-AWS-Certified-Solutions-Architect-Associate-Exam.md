@@ -360,3 +360,202 @@ C. EBS Throughput Optimized HDD (st1)
 D. EBS Cold HDD (sc1)
 
 Answer: C
+
+## A company's development team plans to create an Amazon S3 bucket that contains millions of images. The team wants to maximize the read performance of
+Amazon S3. Which naming scheme should the company use?
+
+A. Add a date as the prefix.
+B. Add a sequential id as the suffix.
+C. Add a hexadecimal hash as the suffix.
+D. Add a hexadecimal hash as the prefix.
+
+Answer: A
+
+* 分析：这道题的旧答案是D，不过根据最新文档档案为A。
+
+> https://docs.aws.amazon.com/AmazonS3/latest/dev/optimizing-performance.html
+>
+> For example, previously Amazon S3 performance guidelines recommended randomizing prefix naming with hashed characters to optimize performance for frequent data retrievals. You no longer have to randomize prefix naming for performance, and can use sequential date-based naming for your prefixes.
+
+* 什么是Prefix?
+
+> For example, your application can achieve at least 3,500 PUT/COPY/POST/DELETE and 5,500 GET/HEAD requests per second per prefix in a bucket. There are no limits to the number of prefixes in a bucket. You can increase your read or write performance by parallelizing reads. For example, if you create 10 prefixes in an Amazon S3 bucket to parallelize reads, you could scale your read performance to 55,000 read requests per second.
+
+> However, if the new limits are not sufficient, prefixes would need to be used. A prefix has no fixed number of characters. It is any string between a bucket name and an object name, for example:
+> bucket/folder1/sub1/file
+> bucket/folder1/sub2/file
+> bucket/1/file
+> bucket/2/file
+> Prefixes of the object 'file' would be: /folder1/sub1/ , /folder1/sub2/, /1/, /2/. 
+
+## A Solutions Architect needs to design a solution that will enable a security team to detect, review, and perform root cause analysis of security incidents that occur in a cloud environment. The Architect must provide a centralized view of all API events for current and future AWS regions. How should the Architect accomplish this task?
+
+A. Enable AWS CloudTrail logging in each individual region. Repeat this for all future regions.
+B. Enable Amazon CloudWatch logs for all AWS services across all regions and aggregate them in a single Amazon S3 bucket.
+C. Enable AWS Trusted Advisor security checks and report all security incidents for all regions.
+D. Enable AWS CloudTrail by creating a new trail and apply the trail to all regions.
+
+Answer: D
+
+* 分析：这道题肯定使用CloudTrail，区别在于设定范围。
+
+> https://aws.amazon.com/cn/about-aws/whats-new/2015/12/turn-on-cloudtrail-across-all-regions-and-support-for-multiple-trails/
+>You can now turn on a trail across all regions for your AWS account. CloudTrail will deliver log files from all regions to the Amazon S3 bucket and an optional CloudWatch Logs log group you specified. Additionally, when AWS launches a new region, CloudTrail will create the same trail in the new region. As a result, you will receive log files containing API activity for the new region without taking any action. Using the CloudTrail console, you can specify that a trail applies to all regions. For more details, refer to the Applying a trail to all regions section of the CloudTrail FAQ.
+
+## A company has a legacy application using a proprietary file system and plans to migrate the application to AWS. Which storage service should the company use?
+
+A. Amazon DynamoDB
+B. Amazon S3
+C. Amazon EBS
+D. Amazon EFS
+
+Answer: C
+
+* 分析：这道题有点蒙人，关键词在proprietary（专有的），EFS未必支持，只有EBS才能100%满足。
+
+## A company plans to use AWS for all new batch processing workloads. The company's developers use Docker containers for the new batch processing. The system design must accommodate critical and non-critical batch processing workloads 24/7. How should a Solutions Architect design this architecture in a cost-efficient manner?
+
+A. Purchase Reserved Instances to run all containers. Use Auto Scaling groups to schedule jobs.
+B. Host a container management service on Spot Instances. Use Reserved Instances to run Docker containers.
+C. Use Amazon ECS orchestration and Auto Scaling groups: one with Reserve Instances, one with Spot Instances.
+D. Use Amazon ECS to manage container orchestration. Purchase Reserved Instances to run all batch workloads at the same time.
+
+* 分析：绕嘴，多读两遍。主要是应对两种不同类型的任务。
+
+## A company is evaluating Amazon S3 as a data storage solution for their daily analyst reports. The company has implemented stringent requirements concerning the security of the data at rest. Specifically, the CISO asked for the use of envelope encryption with separate permissions for the use of an envelope key, automated rotation of the encryption keys, and visibility into when an encryption key was used and by whom. Which steps should a Solutions Architect take to satisfy the security requirements requested by the CISO?
+
+A. Create an Amazon S3 bucket to store the reports and use Server-Side Encryption with Customer-Provided Keys (SSE-C).
+B. Create an Amazon S3 bucket to store the reports and use Server-Side Encryption with Amazon S3-Managed Keys (SSE-S3).
+C. Create an Amazon S3 bucket to store the reports and use Server-Side Encryption with AWS KMS-Managed Keys (SSE-KMS).
+D. Create an Amazon S3 bucket to store the reports and use Amazon s3 versioning with Server-Side Encryption with Amazon S3-Managed Keys (SSE-S3).
+
+Answer: C
+
+* 分析：用S3 + KMS服务。
+
+## (争议)A customer has a production application that frequently overwrites and deletes data, the application requires the most up-to-date version of the data every time it is requested. Which storage should a Solutions Architect recommend to bet accommodate this use case?
+
+A. Amazon S3
+B. Amazon RDS
+C. Amazon RedShift
+D. AWS Storage Gateway
+
+Answer: A
+
+* 分析：这道题的争议点在答案B，因为S3提供eventual consistency for overwirte PUTS and DELETES，可能会导致无法获取最新数据的问题。不确定该问题是否会考到，暂时没有找到更合理的解释。
+
+> Amazon S3 Data Consistency Model(https://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html)
+> Amazon S3 provides read-after-write consistency for PUTS of new objects in your S3 bucket in all Regions with one caveat. The caveat is that if you make a HEAD or GET request to the key name (to find if the object exists) before creating the object, Amazon S3 provides eventual consistency for read-after-write.
+> 
+> Amazon S3 offers eventual consistency for overwrite PUTS and DELETES in all Regions.
+> 
+> Updates to a single key are atomic. For example, if you PUT to an existing key, a subsequent read might return the old data or the updated data, but it never returns corrupted or partial data.
+
+## A Solutions Architect is designing a photo application on AWS. Every time a user uploads a photo to Amazon S3, the Architect must insert a new item to a
+DynamoDB table. Which AWS-managed service is the BEST fit to insert the item?
+
+A. Lambda@Edge
+B. AWS Lambda
+C. Amazon API Gateway
+D. Amazon EC2 instances
+
+Answer: B
+
+* 参考链接：https://aws.amazon.com/cn/blogs/machine-learning/build-your-own-face-recognition-service-using-amazon-rekognition/
+
+## An application relies on messages being sent and received in order. The volume will never exceed more than 300 transactions each second. Which service should be used?
+
+A. Amazon SQS
+B. Amazon SNS
+C. Amazon ECS
+D. AWS STS
+
+Answer: A
+
+> 问：Amazon SNS 与 Amazon SQS 有何不同？
+>
+> Amazon Simple Queue Service (SQS) 和 Amazon SNS 都是 AWS 中的消息收发服务，但为开发人员提供了不同的优势。Amazon SNS 允许应用程序通过“推送”机制向多个订阅者发送时间关键型消息，并且无需定期检查或“轮询”更新。Amazon SQS 是一种供分布式应用程序使用的消息队列服务，通过轮询模式交换消息，可用于分离收发组件。Amazon SQS 使应用程序的分布式组件可以灵活地收发消息，并且不要求每个组件同时可用。
+> 
+> 一种常见的模式是使用 SNS 将消息发布到 Amazon SQS 队列，进而以可靠的方式将消息异步发送到一个或多个系统组件。
+
+## A Solutions Architect is designing an application on AWS that uses persistent block storage. Data must be encrypted at rest. Which solution meets the requirement?
+
+A. Enable SSL on Amazon EC2 instances.
+B. Encrypt Amazon EBS volumes on Amazon EC2 instances.
+C. Enable server-side encryption on Amazon S3.
+D. Encrypt Amazon EC2 Instance Storage.
+
+Answer: B
+
+* New EBS Encryption for Additional Data Protection(https://aws.amazon.com/cn/blogs/aws/protect-your-data-with-new-ebs-encryption/)
+
+## (争议)A company is launching a static website using the zone apex (mycompany.com). The company wants to use Amazon Route 53 for DNS. Which steps should the company perform to implement a scalable and cost-effective solution? (Choose two.)
+
+A. Host the website on an Amazon EC2 instance with ELB and Auto Scaling, and map a Route 53 alias record to the ELB endpoint.
+B. Host the website using AWS Elastic Beanstalk, and map a Route 53 alias record to the Beanstalk stack.
+C. Host the website on an Amazon EC2 instance, and map a Route 53 alias record to the public IP address of the Amazon EC2 instance.
+D. Serve the website from an Amazon S3 bucket, and map a Route 53 alias record to the website endpoint.
+E. Create a Route 53 hosted zone, and set the NS records of the domain to use Route 53 name servers.
+
+Answer: DE
+
+* 分析：又是一道争议非常大的题，原来的答案是CD，从cost-effective的角度说C确实不够经济。参考AWS如何构建静态网站的最佳实践：https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html
+
+## (争议)A manufacturing company captures data from machines running at customer sites. Currently, thousands of machines send data every 5 minutes, and this is expected to grow to hundreds of thousands of machines in the near future. The data is logged with the intent to be analyzed in the future as needed. What is the SIMPLEST method to store this streaming data at scale?
+
+A. Create an Amazon Kinesis Firehouse delivery stream to store the data in Amazon S3.
+B. Create an Auto Scaling group of Amazon EC2 servers behind ELBs to write the data into Amazon RDS.
+C. Create an Amazon SQS queue, and have the machines write to the queue.
+D. Create an Amazon EC2 server farm behind an ELB to store the data in Amazon EBS Cold HDD volumes.
+
+Answer: A
+
+* 分析：很奇怪为什么原有答案给出B，这道题明显是暗指实时计算Kinesis服务。
+
+## A bank is writing new software that is heavily dependent upon the database transactions for write consistency. The application will also occasionally generate reports on data in the database, and will do joins across multiple tables. The database must automatically scale as the amount of data grows. Which AWS service should be used to run the database?
+
+A. Amazon S3
+B. Amazon Aurora
+C. Amazon DynamoDB
+D. Amazon Redshift
+
+Answer: B
+
+* 分析：很明显需要关系型数据库。
+
+## A Solutions Architect is designing a new application that needs to access data in a different AWS account located within the same region. The data must not be accessed over the Internet. Which solution will meet these requirements with the LOWEST cost?
+
+A. Add rules to the security groups in each account.
+B. Establish a VPC Peering connection between accounts.
+C. Configure Direct Connect in each account.
+D. Add a NAT Gateway to the data account.
+
+Answer: B
+
+* 分析：B的方案是成本最低的。
+
+## A Solutions Architect is designing a mobile application that will capture receipt images to track expenses. The Architect wants to store the images on Amazon S3. However, uploading images through the web server will create too much traffic. What is the MOST efficient method to store images from a mobile application on Amazon S3?
+
+A. Upload directly to S3 using a pre-signed URL.
+B. Upload to a second bucket, and have a Lambda event copy the image to the primary bucket.
+C. Upload to a separate Auto Scaling group of servers behind an ELB Classic Load Balancer, and have them write to the Amazon S3 bucket.
+D. Expand the web server fleet with Spot Instances to provide the resources to handle the images.
+
+Answer: C
+
+* 分析：A选项相较于题目中描述的并没有本质区别。
+
+> A presigned URL gives you access to the object identified in the URL, provided that the creator of the presigned URL has permissions to access that object. That is, if you receive a presigned URL to upload an object, you can upload the object only if the creator of the presigned URL has the necessary permissions to upload that object.
+> 
+> All objects and buckets by default are private. The presigned URLs are useful if you want your user/customer to be able to upload a specific object to your bucket, but you don't require them to have AWS security credentials or permissions. When you create a presigned URL, you must provide your security credentials and then specify a bucket name, an object key, an HTTP method (PUT for uploading objects), and an expiration date and time. The presigned URLs are valid only for the specified duration.
+
+## A company requires that the source, destination, and protocol of all IP packets be recorded when traversing a private subnet. What is the MOST secure and reliable method of accomplishing this goal.
+
+A. Create VPC flow logs on the subnet.
+B. Enable source destination check on private Amazon EC2 instances.
+C. Enable AWS CloudTrail logging and specify an Amazon S3 bucket for storing log files.
+D. Create an Amazon CloudWatch log to capture packet information.
+
+Answer: A
+
+* 分析：启动VPC流表日志, CloudTrail没有此能力

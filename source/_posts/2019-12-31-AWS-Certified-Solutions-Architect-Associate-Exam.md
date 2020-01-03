@@ -142,47 +142,44 @@ Answer: BD
 * 分析：又是原网站一道错题，原网站答案为AD。D选项是允许Lambda服务访问RDS，所以在进方向允许。
 * 目前VPC支持Endpoint的服务：https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-endpoints.html
 
-```
-接口终端节点是一个弹性网络接口，具有来自子网 IP 地址范围的私有 IP 地址，用作发送到受支持的服务的通信的入口点。支持以下服务：
-Amazon API Gateway
-Amazon AppStream 2.0
-AWS App Mesh
-Amazon Athena
-AWS CloudFormation
-AWS CloudTrail
-Amazon CloudWatch
-Amazon CloudWatch Events
-Amazon CloudWatch Logs
-AWS CodeBuild
-AWS CodeCommit
-AWS CodePipeline
-AWS Config
-AWS DataSync
-Amazon EC2 API
-Elastic Load Balancing
-Amazon Elastic Container Registry
-Amazon Elastic Container Service
-AWS Glue
-AWS Key Management Service
-Amazon Kinesis Data Firehose
-Amazon Kinesis Data Streams
-Amazon Rekognition
-Amazon SageMaker 和 Amazon SageMaker 运行时
-Amazon SageMaker 笔记本
-AWS Secrets Manager
-AWS Security Token Service
-AWS Service Catalog
-Amazon SNS
-Amazon SQS
-AWS Systems Manager
-AWS Storage Gateway
-AWS Transfer for SFTP
-其他 AWS 账户托管的终端节点服务
-
-网关终端节点是一个网关，作为您在路由表中指定的路由的目标，用于发往受支持的 AWS 服务的流量。支持以下 AWS 服务：
-Amazon S3
-DynamoDB
-```
+> Amazon API Gateway
+> Amazon AppStream 2.0
+> AWS App Mesh
+> Amazon Athena
+> AWS CloudFormation
+> AWS CloudTrail
+> Amazon CloudWatch
+> Amazon CloudWatch Events
+> Amazon CloudWatch Logs
+> AWS CodeBuild
+> AWS CodeCommit
+> AWS CodePipeline
+> AWS Config
+> AWS DataSync
+> Amazon EC2 API
+> Elastic Load Balancing
+> Amazon Elastic Container Registry
+> Amazon Elastic Container Service
+> AWS Glue
+> AWS Key Management Service
+> Amazon Kinesis Data Firehose
+> Amazon Kinesis Data Streams
+> Amazon Rekognition
+> Amazon SageMaker 和 Amazon SageMaker 运行时
+> Amazon SageMaker 笔记本
+> AWS Secrets Manager
+> AWS Security Token Service
+> AWS Service Catalog
+> Amazon SNS
+> Amazon SQS
+> AWS Systems Manager
+> AWS Storage Gateway
+> AWS Transfer for SFTP
+> 其他 AWS 账户托管的终端节点服务
+> 
+> 网关终端节点是一个网关，作为您在路由表中指定的路由的目标，用于发往受支持的 AWS 服务的流量。支持以下 AWS 服务：
+> Amazon S3
+> DynamoDB
 
 ## (待实际环境验证)A Solutions Architect needs to build a resilient data warehouse using Amazon Redshift. The Architect needs to rebuild the Redshift cluster in another region. Which approach can the Architect take to address this requirement?
 
@@ -195,17 +192,15 @@ Answer: A
 
 * 分析：又是一道错题，Redhift备份是通过S3实现的, 所以不存在B的情况，我个人有点倾向于C，但是A确实是Redshift在快照时默认的格式，可能是更容易恢复吧，这道题需要在实际环境进行一下验证。另外国际版本的Redshift和国内的应该比国内的高很多。
 
-```
-问：Amazon Redshift 如何备份数据？ 如何从备份中还原我的集群？
-
-在加载数据时，Amazon Redshift 会复制数据仓库集群内的所有数据并将其连续备份至 S3。Amazon Redshift 始终尝试维持至少三份数据（计算节点上的正本数据、副本数据和 Amazon S3 上的备份数据）。Redshift 还能将您的快照异步复制到另一个区域的 S3 中进行灾难恢复。
-
-默认情况下，Amazon Redshift 以一天的保留期启用数据仓库群集的自动化备份。您可将其配置为 35 天之久。
-
-免费备份存储受限于数据仓库群集中节点上的总存储大小，并仅适用于已激活的数据仓库群集。例如，如果您有 8TB 的数据仓库总存储大小，那么我们将提供最多 8TB 的备份存储而不另外收费。如果您想将备份保留期延长为超过一天，那么您可以使用 AWS 管理控制台或 Amazon Redshift API 来实现这一目的。有关自动快照的更多信息，请参阅《Amazon Redshift 管理指南》。Amazon Redshift 仅备份已更改的数据，因此大多数快照仅占用少量的免费备份存储。
-
-如果您需要还原备份，则可以在备份保留期内访问所有自动备份。在您选择某个要还原的备份后，我们将预置一个新的数据仓库集群并将数据还原至此集群中。
-```
+> 问：Amazon Redshift 如何备份数据？ 如何从备份中还原我的集群？
+> 
+> 在加载数据时，Amazon Redshift 会复制数据仓库集群内的所有数据并将其连续备份至 S3。Amazon Redshift 始终尝试维持至少三份数据（计算节点上的正本数据、副本数据和 Amazon S3 上的备份数据）。Redshift 还能将您的快照异步复制到另一个区域的 S3 中进行灾难恢复。
+> 
+> 默认情况下，Amazon Redshift 以一天的保留期启用数据仓库群集的自动化备份。您可将其配置为 35 天之久。
+> 
+> 免费备份存储受限于数据仓库群集中节点上的总存储大小，并仅适用于已激活的数据仓库群集。例如，如果您有 8TB 的数据仓库总存储大小，那么我们将提供最多 8TB 的备份存储而不另外收费。如果您想将备份保留期延长为超过一天，那么您可以使用 AWS 管理控制台或 Amazon Redshift API 来实现这一目的。有关自动快照的更多信息，请参阅《Amazon Redshift 管理指南》。Amazon Redshift 仅备份已更改的数据，因此大多数快照仅占用少量的免费备份存储。
+> 
+> 如果您需要还原备份，则可以在备份保留期内访问所有自动备份。在您选择某个要还原的备份后，我们将预置一个新的数据仓库集群并将数据还原至此集群中。
 
 ## A popular e-commerce application runs on AWS. The application encounters performance issues. The database is unable to handle the amount of queries and load during peak times. The database is running on the RDS Aurora engine on the largest instance size available. What should an administrator do to improve performance?
 
@@ -218,8 +213,150 @@ Answer: C
 
 * 分析：这道题我最开始选择的是D，但是评论区的一种解释有一定的道理：这个网站应用类型为电商，原题中没有很清楚说明queris and load的压力有多大，很可能我们建立了read replicas只能临时性解决问题，并不是一劳永逸的方式。并且根据https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Replication.html
 
-```
-因此，所有 Aurora 副本均返回相同的查询结果数据，且副本滞后时间非常短 - 通常远远少于主实例写入更新后的 100 毫秒。副本滞后因数据库更改速率而异。也就是说，在对数据库执行大量写入操作期间，您可能发现副本滞后时间变长。
-```
+> 因此，所有 Aurora 副本均返回相同的查询结果数据，且副本滞后时间非常短 - 通常远远少于主实例写入更新后的 100 毫秒。副本滞后因数据库更改速率而异。也就是说，在对数据库执行大量写入操作期间，您可能发现副本滞后时间变长。
 
 如果读副本在这个延时上，很可能对业务系统造成很大的影响。
+
+## A Solutions Architect is designing the architecture for a new three-tier web-based e-commerce site that must be available 24/7. Requests are expected to range from 100 to 10,000 each minute. Usage can vary depending on time of day, holidays, and promotions. The design should be able to handle these volumes, with the ability to handle higher volumes if necessary. How should the Architect design the architecture to ensure the web tier is cost-optimized and can handle the expected traffic? (Select two.)
+
+A. Launch Amazon EC2 instances in an Auto Scaling group behind an ELB.
+B. Store all static files in a multi-AZ Amazon Aurora database.
+C. Create an CloudFront distribution pointing to static content in Amazon S3.
+D. Use Amazon Route 53 to route traffic to the correct region.
+E. Use Amazon S3 multi-part uploads to improve upload times.
+
+Answer: AC
+
+* 分析：A是很明显的，弹性伸缩，节约成本，其他几项和题干没有太多关系，所以选的C。
+
+## A Solution Architect is designing a three-tier web application. The Architect wants to restrict access to the database tier to accept traffic from the application servers only. However, these application servers are in an Auto Scaling group and may vary in quantity. How should the Architect configure the database servers to meet the requirements?
+
+A. Configure the database security group to allow database traffic from the application server IP addresses.
+B. Configure the database security group to allow database traffic from the application server security group.
+C. Configure the database subnet network ACL to deny all inbound non-database traffic from the application-tier subnet.
+D. Configure the database subnet network ACL to allow inbound database traffic from the application-tier subnet.
+
+Answer: B
+
+* 分析：这好像又是一道错题，原给出的答案是C。首先要明确的一点是SG是工作在instance级别，NACL是在子网级别，SG默认全部Deny，NACL默认全部Allow。A不对的原因是insance在Auto Scaling里，IP地址是不固定的。D不对的原因是NACL默认全都是Allow的。其实本质上考察的是如何选择安全组还是网络防火墙的问题。不选择C的原因是因为配置NACL规则至少需要阻止和允许，而通过安全组只需要配置一条即可。但是也有一种声音认为题目中关键词restrict意味着需要deny流量。
+
+> 问：VPC 中的安全组和 VPC 中的网络 ACL 有什么区别？
+> 
+> VPC 中的安全组指定允许传入或传出 Amazon EC2 实例的流量。网络 ACL 则在子网级别上运作，评估进出某个子网的流量。网络 ACL 可通过设置允许和拒绝规则来进行使用。Network ACL 不能筛选同一子网中实例之间的流量。此外，网络 ACL 执行无状态筛选，而安全组则执行有状态筛选。
+
+## An Internet-facing multi-tier web application must be highly available. An ELB Classic Load Balancer is deployed in front of the web tier. Amazon EC2 instances at the web application tier are deployed evenly across two Availability Zones. The database is deployed using RDS Multi-AZ. A NAT instance is launched for Amazon EC2 instances and database resources to access the Internet. These instances are not assigned with public IP addresses. Which component poses a potential single point of failure in this architecture?
+
+A. Amazon EC2
+B. NAT instance
+C. ELB Classic Load Balancer
+D. Amazon RDS
+
+Answer: B
+
+* 分析：这道题竟然给出了C的答案，很意外。
+
+> https://aws.amazon.com/articles/high-availability-for-amazon-vpc-nat-instances-an-example/
+>
+> Instances in a private subnet can access the Internet without exposing their private IP address by routing their traffic through a Network Address Translation (NAT) instance in a public subnet. A NAT instance, however, can introduce a single point of failure to your VPC's outbound traffic. This situation is depicted in the diagram below.
+
+## A call center application consists of a three-tier application using Auto Scaling groups to automatically scale resources as needed. Users report that every morning at 9:00 AM the system becomes very slow for about 15 minutes. A Solution Architect determines that a large percentage of the call center staff starts work at 9:00 AM, so Auto Scaling does not have enough time to scale out to meet demand. How can the Architect fix the problem?
+
+A. Change the Auto Scaling group's scale out event to scale based on network utilization.
+B. Create an Auto Scaling scheduled action to scale out the necessary resources at 8:30 AM every morning.
+C. Use Reserved Instances to ensure the system has reserved the right amount of capacity for the scale-up events.
+D. Permanently keep a steady state of instances that is needed at 9:00 AM to guarantee available resources, but leverage Spot Instances.
+
+Answer: B
+
+* 分析：竟然又是一道错题，记得在AWS听过这道题的分析。原答案是A，但是可能并不是由于网络引起的访问缓慢。
+
+## An e-commerce application is hosted in AWS. The last time a new product was launched, the application experienced a performance issue due to an enormous spike in traffic. Management decided that capacity must be doubled the week after the product is launched. Which is the MOST efficient way for management to ensure that capacity requirements are met?
+
+A. Add a Step Scaling policy.
+B. Add a Dynamic Scaling policy.
+C. Add a Scheduled Scaling action.
+D. Add Amazon EC2 Spot Instances.
+
+Answer: B
+
+* 分析：又是一道争议比较大的题目，争议最大的是C选项，因为题目中有几个词在暗示时间，但是又不明确。既然现有性能上无法应对高峰访问，那么从这个角度还是通过Dynamic配置一个规则进行动态规则最为有效。所以还是选择B。
+
+## A customer owns a simple API for their website that receives about 1,000 requests each day and has an average response time of 50 ms. It is currently hosted on one c4.large instance. Which changes to the architecture will provide high availability at the LOWEST cost?
+
+A. Create an Auto Scaling group with a minimum of one instance and a maximum of two instances, then use an Application Load Balancer to balance the traffic.
+B. Recreate the API using Amazon API Gateway and use AWS Lambda as the service backend.
+C. Create an Auto Scaling group with a maximum of two instances, then use an Application Load Balancer to balance the traffic.
+D. Recreate the API using Amazon API Gateway and integrate the new API with the existing backend service.
+
+Answer: A
+
+* 分析：这道题有个陷阱，Simple API，确实如果在不考虑开发的前提下B确实是最佳选项，但是重构也是要花成本的。所以我坚持选A。
+
+## A Solution Architect is designing an application that uses Amazon EBS volumes. The volumes must be backed up to a different region. How should the Architect meet this requirement?
+
+A. Create EBS snapshots directly from one region to another.
+B. Move the data to an Amazon S3 bucket and enable cross-region replication.
+C. Create EBS snapshots and then copy them to the desired region.
+D. Use a script to copy data from the current Amazon EBS volume to the destination Amazon EBS volume.
+
+Answer: C
+
+## A company is using an Amazon S3 bucket located in us-west-2 to serve videos to their customers. Their customers are located all around the world and the videos are requested a lot during peak hours. Customers in Europe complain about experiencing slow downloaded speeds, and during peak hours, customers in all locations report experiencing HTTP 500 errors. What can a Solutions Architect do to address these issues?
+
+A. Place an elastic load balancer in front of the Amazon S3 bucket to distribute the load during peak hours.
+B. Cache the web content with Amazon CloudFront and use all Edge locations for content delivery.
+C. Replicate the bucket in eu-west-1 and use an Amazon Route 53 failover routing policy to determine which bucket it should serve the request to.
+D. Use an Amazon Route 53 weighted routing policy for the CloudFront domain name to distribute the GET request between CloudFront and the Amazon S3 bucket directly.
+
+Answer: B
+
+* 分析：网站给出的答案竟然是D，但是B很明显是正确的。
+
+## A Solutions Architect is designing a solution that includes a managed VPN connection. To monitor whether the VPN connection is up or down, the Architect should use:
+
+A. an external service to ping the VPN endpoint from outside the VPC.
+B. AWS CloudTrail to monitor the endpoint.
+C. the CloudWatch TunnelState Metric.
+D. an AWS Lambda function that parses the VPN connection logs.
+
+Answer: C
+
+> Monitoring VPN Tunnels Using Amazon CloudWatch(https://docs.aws.amazon.com/vpn/latest/s2svpn/monitoring-cloudwatch-vpn.html)
+
+## A social networking portal experiences latency and throughput issues due to an increased number of users. Application servers use very large datasets from an Amazon RDS database, which creates a performance bottleneck on the database. Which AWS service should be used to improve performance?
+
+A. Auto Scaling
+B. Amazon SQS
+C. Amazon ElastiCache
+D. ELB Application Load Balancer
+
+Answer: C
+
+## A Solutions Architect is designing network architecture for an application that has compliance requirements. The application will be hosted on Amazon EC2 instances in a private subnet and will be using Amazon S3 for storing data. The compliance requirements mandate that the data cannot traverse the public Internet. What is the MOST secure way to satisfy this requirement?
+
+A. Use a NAT Instance.
+B. Use a NAT Gateway.
+C. Use a VPC endpoint.
+D. Use a Virtual Private Gateway.
+
+Answer: C
+
+> New – VPC Endpoint for Amazon S3(https://aws.amazon.com/cn/blogs/aws/new-vpc-endpoint-for-amazon-s3/)
+
+## Developers are creating a new online transaction processing (OLTP) application for a small database that is very read-write intensive. A single table in the database is updated continuously throughout the day, and the developers want to ensure that the database performance is consistent. Which Amazon EBS storage option will achieve the MOST consistent performance to help maintain application performance?
+
+A. Provisioned IOPS SSD
+B. General Purpose SSD
+C. Cold HDD
+D. Throughput Optimized HDD
+
+Answer: A
+
+## A Solutions Architect is designing a log-processing solution that requires storage that supports up to 500 MB/s throughput. The data is sequentially accessed by an Amazon EC2 instance. Which Amazon storage type satisfies these requirements?
+
+A. EBS Provisioned IOPS SSD (io1)
+B. EBS General Purpose SSD (gp2)
+C. EBS Throughput Optimized HDD (st1)
+D. EBS Cold HDD (sc1)
+
+Answer: C

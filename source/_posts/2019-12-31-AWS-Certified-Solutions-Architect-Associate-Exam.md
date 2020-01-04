@@ -6,6 +6,8 @@ tags: [AWS, ACA Exam]
 
 参考链接：https://www.examtopics.com/exams/amazon/aws-certified-solutions-architect-associate/view/
 
+一直对AWS情有独钟，也想尝试考取最高认证，但是苦于无法集中精力学习。2019年由于和AWS合作的原因，所以痛下决心一定要考取AWS各种认证。另外，在AWS的学习过程中，也逐渐帮我梳理了以前在OpenStack开发过程中不是很清晰的设计理念。并且AWS的文档和最佳实践堪称各个公有云的典范，非常具有学习价值。考试不是最终的目的，学以致用才是。
+
 由于备考AWS ACA考试，所以从网上看到这套模拟试题，在学习过程中对试题进行系统性分析和记录。发现有很多问题答案并非十分准确，所以也尝试做出分析和更正。
 
 <!-- more -->
@@ -176,7 +178,7 @@ Answer: BD
 > AWS Storage Gateway
 > AWS Transfer for SFTP
 > 其他 AWS 账户托管的终端节点服务
-> 
+>
 > 网关终端节点是一个网关，作为您在路由表中指定的路由的目标，用于发往受支持的 AWS 服务的流量。支持以下 AWS 服务：
 > Amazon S3
 > DynamoDB
@@ -193,13 +195,13 @@ Answer: A
 * 分析：又是一道错题，Redhift备份是通过S3实现的, 所以不存在B的情况，我个人有点倾向于C，但是A确实是Redshift在快照时默认的格式，可能是更容易恢复吧，这道题需要在实际环境进行一下验证。另外国际版本的Redshift和国内的应该比国内的高很多。
 
 > 问：Amazon Redshift 如何备份数据？ 如何从备份中还原我的集群？
-> 
+>
 > 在加载数据时，Amazon Redshift 会复制数据仓库集群内的所有数据并将其连续备份至 S3。Amazon Redshift 始终尝试维持至少三份数据（计算节点上的正本数据、副本数据和 Amazon S3 上的备份数据）。Redshift 还能将您的快照异步复制到另一个区域的 S3 中进行灾难恢复。
-> 
+>
 > 默认情况下，Amazon Redshift 以一天的保留期启用数据仓库群集的自动化备份。您可将其配置为 35 天之久。
-> 
+>
 > 免费备份存储受限于数据仓库群集中节点上的总存储大小，并仅适用于已激活的数据仓库群集。例如，如果您有 8TB 的数据仓库总存储大小，那么我们将提供最多 8TB 的备份存储而不另外收费。如果您想将备份保留期延长为超过一天，那么您可以使用 AWS 管理控制台或 Amazon Redshift API 来实现这一目的。有关自动快照的更多信息，请参阅《Amazon Redshift 管理指南》。Amazon Redshift 仅备份已更改的数据，因此大多数快照仅占用少量的免费备份存储。
-> 
+>
 > 如果您需要还原备份，则可以在备份保留期内访问所有自动备份。在您选择某个要还原的备份后，我们将预置一个新的数据仓库集群并将数据还原至此集群中。
 
 ## A popular e-commerce application runs on AWS. The application encounters performance issues. The database is unable to handle the amount of queries and load during peak times. The database is running on the RDS Aurora engine on the largest instance size available. What should an administrator do to improve performance?
@@ -241,7 +243,7 @@ Answer: B
 * 分析：这好像又是一道错题，原给出的答案是C。首先要明确的一点是SG是工作在instance级别，NACL是在子网级别，SG默认全部Deny，NACL默认全部Allow。A不对的原因是insance在Auto Scaling里，IP地址是不固定的。D不对的原因是NACL默认全都是Allow的。其实本质上考察的是如何选择安全组还是网络防火墙的问题。不选择C的原因是因为配置NACL规则至少需要阻止和允许，而通过安全组只需要配置一条即可。但是也有一种声音认为题目中关键词restrict意味着需要deny流量。
 
 > 问：VPC 中的安全组和 VPC 中的网络 ACL 有什么区别？
-> 
+>
 > VPC 中的安全组指定允许传入或传出 Amazon EC2 实例的流量。网络 ACL 则在子网级别上运作，评估进出某个子网的流量。网络 ACL 可通过设置允许和拒绝规则来进行使用。Network ACL 不能筛选同一子网中实例之间的流量。此外，网络 ACL 执行无状态筛选，而安全组则执行有状态筛选。
 
 ## An Internet-facing multi-tier web application must be highly available. An ELB Classic Load Balancer is deployed in front of the web tier. Amazon EC2 instances at the web application tier are deployed evenly across two Availability Zones. The database is deployed using RDS Multi-AZ. A NAT instance is launched for Amazon EC2 instances and database resources to access the Internet. These instances are not assigned with public IP addresses. Which component poses a potential single point of failure in this architecture?
@@ -386,7 +388,7 @@ Answer: A
 > bucket/folder1/sub2/file
 > bucket/1/file
 > bucket/2/file
-> Prefixes of the object 'file' would be: /folder1/sub1/ , /folder1/sub2/, /1/, /2/. 
+> Prefixes of the object 'file' would be: /folder1/sub1/ , /folder1/sub2/, /1/, /2/.
 
 ## A Solutions Architect needs to design a solution that will enable a security team to detect, review, and perform root cause analysis of security incidents that occur in a cloud environment. The Architect must provide a centralized view of all API events for current and future AWS regions. How should the Architect accomplish this task?
 
@@ -446,9 +448,9 @@ Answer: A
 
 > Amazon S3 Data Consistency Model(https://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html)
 > Amazon S3 provides read-after-write consistency for PUTS of new objects in your S3 bucket in all Regions with one caveat. The caveat is that if you make a HEAD or GET request to the key name (to find if the object exists) before creating the object, Amazon S3 provides eventual consistency for read-after-write.
-> 
+>
 > Amazon S3 offers eventual consistency for overwrite PUTS and DELETES in all Regions.
-> 
+>
 > Updates to a single key are atomic. For example, if you PUT to an existing key, a subsequent read might return the old data or the updated data, but it never returns corrupted or partial data.
 
 ## A Solutions Architect is designing a photo application on AWS. Every time a user uploads a photo to Amazon S3, the Architect must insert a new item to a
@@ -475,7 +477,7 @@ Answer: A
 > 问：Amazon SNS 与 Amazon SQS 有何不同？
 >
 > Amazon Simple Queue Service (SQS) 和 Amazon SNS 都是 AWS 中的消息收发服务，但为开发人员提供了不同的优势。Amazon SNS 允许应用程序通过“推送”机制向多个订阅者发送时间关键型消息，并且无需定期检查或“轮询”更新。Amazon SQS 是一种供分布式应用程序使用的消息队列服务，通过轮询模式交换消息，可用于分离收发组件。Amazon SQS 使应用程序的分布式组件可以灵活地收发消息，并且不要求每个组件同时可用。
-> 
+>
 > 一种常见的模式是使用 SNS 将消息发布到 Amazon SQS 队列，进而以可靠的方式将消息异步发送到一个或多个系统组件。
 
 ## A Solutions Architect is designing an application on AWS that uses persistent block storage. Data must be encrypted at rest. Which solution meets the requirement?
@@ -546,7 +548,7 @@ Answer: C
 * 分析：A选项相较于题目中描述的并没有本质区别。
 
 > A presigned URL gives you access to the object identified in the URL, provided that the creator of the presigned URL has permissions to access that object. That is, if you receive a presigned URL to upload an object, you can upload the object only if the creator of the presigned URL has the necessary permissions to upload that object.
-> 
+>
 > All objects and buckets by default are private. The presigned URLs are useful if you want your user/customer to be able to upload a specific object to your bucket, but you don't require them to have AWS security credentials or permissions. When you create a presigned URL, you must provide your security credentials and then specify a bucket name, an object key, an HTTP method (PUT for uploading objects), and an expiration date and time. The presigned URLs are valid only for the specified duration.
 
 ## A company requires that the source, destination, and protocol of all IP packets be recorded when traversing a private subnet. What is the MOST secure and reliable method of accomplishing this goal.
@@ -559,3 +561,260 @@ D. Create an Amazon CloudWatch log to capture packet information.
 Answer: A
 
 * 分析：启动VPC流表日志, CloudTrail没有此能力
+
+## A Solutions Architect has a multi-layer application running in Amazon VPC. The application has an ELB Classic Load Balancer as the front end in a public subnet, and an Amazon EC2-based reverse proxy that performs content-based routing to two backend Amazon EC2 instances hosted in a private subnet. The Architect sees tremendous traffic growth and is concerned that the reverse proxy and current backend set up will be insufficient. Which actions should the Architect take to achieve a cost-effective solution that ensures the application automatically scales to meet traffic demand? (Select two.)
+
+A. Replace the Amazon EC2 reverse proxy with an ELB internal Classic Load Balancer.
+B. Add Auto Scaling to the Amazon EC2 backend fleet.
+C. Add Auto Scaling to the Amazon EC2 reverse proxy layer.
+D. Use t2 burstable instance types for the backend fleet.
+E. Replace both the frontend and reverse proxy layers with an ELB Application Load Balancer.
+
+Answer: BE
+
+* 分析：又是一道错题，原答案是AB。根据题目分析，出现瓶颈的地方来自于两处：反向代理和后端服务。后端服务的扩展没有什么争议，所以B很明显是正确的。最大的争议来自于是使用什么方式替代目前成为瓶颈的反向代理EC2。原题里反向代理EC2作为content-based routing，那么问题的关键就是CLB、ELB谁能做content-based routing了。根据目前最新的内容，所以需要使用Application Load Balancer来提供content-based routing了。
+
+> There are three types of Elastic Load Balancer (ELB) on AWS:
+>
+> Classic Load Balancer (CLB) – this is the oldest of the three and provides basic load balancing at both layer 4 and layer 7.
+>
+> Application Load Balancer (ALB) – layer 7 load balancer that routes connections based on the content of the request.
+>
+> Network Load Balancer (NLB) – layer 4 load balancer that routes connections based on IP protocol data.
+>
+> Note: The Classic Load Balancer may be phased out over time and Amazon are promoting the ALB and NLB for most use cases within VPC.
+
+> Introducing Amazon EC2 Fleet
+> Posted On: May 2, 2018
+>
+> Amazon EC2 Fleet is a new feature that simplifies the provisioning of Amazon EC2 capacity across different Amazon EC2 instance types, Availability Zones and across On-Demand, Amazon EC2 Reserved Instances (RI) and Amazon EC2 Spot purchase models. With a single API call, now you can provision capacity across EC2 instance types and across purchase models to achieve desired scale, performance and cost.
+>
+> You can create an EC2 Fleet specification defining target capacity, which EC2 instance types work for you, and how much of your fleet should be filled using On-Demand, RI and Spot purchase models. You can also indicate whether EC2 Fleet should take into account the number of cores and amount of memory on each instance or consider all instances equal when scaling. EC2 Fleet then launches the lowest price combination of instances to meet the target capacity based on these preferences. EC2 fleet enables you to use multiple instance types and purchase models to provision capacity cost effectively, with just a few clicks in the AWS Management Console.
+>
+> Amazon EC2 Fleet is now available in all public Regions. To learn more about simplifying the provisioning of Amazon EC2 capacity across different Amazon EC2 instance types, AWS Availability Zones and across On-Demand, RI and Spot purchase models using Amazon EC2 Fleet, visit this blog. To learn more about Amazon EC2 pricing models, visit this page.
+
+* EC2 Fleet – Manage Thousands of On-Demand and Spot Instances with One Request(https://amazonaws-china.com/blogs/aws/ec2-fleet-manage-thousands-of-on-demand-and-spot-instances-with-one-request/)
+* New – Advanced Request Routing for AWS Application Load Balancers(https://amazonaws-china.com/blogs/aws/new-advanced-request-routing-for-aws-application-load-balancers/)
+* ELASTIC LOAD BALANCING(https://digitalcloud.training/certification-training/aws-solutions-architect-associate/compute/elastic-load-balancing/)
+
+## A company is launching a marketing campaign on their website tomorrow and expects a significant increase in traffic. The website is designed as a multi-tiered web architecture, and the increase in traffic could potentially overwhelm the current design. What should a Solutions Architect do to minimize the effects from a potential failure in one or more of the tiers?
+
+A. Migrate the database to Amazon RDS.
+B. Set up DNS failover to a statistic website.
+C. Use Auto Scaling to keep up with the demand.
+D. Use both a SQL and a NoSQL database in the design.
+
+Answer: C
+
+* 分析：明天就上线了，改啥都来不及了，还是价格Auto scaling策略吧。
+
+## A web application experiences high compute costs due to serving a high amount of static web content. How should the web server architecture be designed to be the MOST cost-efficient?
+
+A. Create an Auto Scaling group to scale out based on average CPU usage.
+B. Create an Amazon CloudFront distribution to pull static content from an Amazon S3 bucket.
+C. Leverage Reserved Instances to add additional capacity at a significantly lower price.
+D. Create a multi-region deployment using an Amazon Route 53 geolocation routing policy.
+
+Answer: B
+
+## A web application experiences high compute costs due to serving a high amount of static web content. How should the web server architecture be designed to be the MOST cost-efficient?
+
+A. Create an Auto Scaling group to scale out based on average CPU usage.
+B. Create an Amazon CloudFront distribution to pull static content from an Amazon S3 bucket.
+C. Leverage Reserved Instances to add additional capacity at a significantly lower price.
+D. Create a multi-region deployment using an Amazon Route 53 geolocation routing policy.
+
+Answer: B
+
+## A Solutions Architect plans to migrate NAT instances to NAT gateway. The Architect has NAT instances with scripts to manage high availability. What is the MOST efficient method to achieve similar high availability with NAT gateway?
+
+A. Remove source/destination check on NAT instances.
+B. Launch a NAT gateway in each Availability Zone.
+C. Use a mix of NAT instances and NAT gateway.
+D. Add an ELB Application Load Balancer in front of NAT gateway.
+
+Answer: B
+
+* NAT 实例与 NAT 网关的比较(https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-nat-comparison.html)
+
+> 每个 NAT 网关都在特定可用区中创建，并在该可用区进行冗余实施。您可以在一个可用区中创建的 NAT 网关存在数量限制。有关更多信息，请参阅 Amazon VPC 限制。
+>
+> 注意:
+> 如果您在多个可用区中拥有资源，并且它们共享一个 NAT 网关，则在该 NAT 网关的可用区不可用时，其他可用区中的资源将无法访问 Internet。要创建不依赖于可用区的架构，请在每个可用区中都创建一个 NAT 网关，并配置路由以确保这些资源使用自身可用区中的 NAT 网关。
+
+## A Solutions Architect is designing a solution to store a large quantity of event data in Amazon S3. The Architect anticipates that the workload will consistently exceed 100 requests each second. What should the Architect do in Amazon S3 to optimize performance?
+
+A. Randomize a key name prefix.
+B. Store the event data in separate buckets.
+C. Randomize the key name suffix.
+D. Use Amazon S3 Transfer Acceleration.
+
+Answer: A
+
+* 分析：这道题和上面有道题类似，目前S3建议使用时间作为prefix，原来是建议使用hash方式。
+* 最佳实践设计模式：优化 Amazon S3 性能(https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/optimizing-performance.html)
+
+> 下面的主题介绍的最佳实践准则和设计模式用于优化使用 Amazon S3 的应用程序的性能。本指南的优先级高于之前有关优化 Amazon S3 的性能的任何指南。例如，以前的 Amazon S3 性能指南建议用哈希字符来随机化前缀命名，以便优化频繁数据检索的性能。现在，您不再需要为了提高性能随机化前缀命名，而是可以对前缀使用基于顺序日期的命名方式。有关对 Amazon S3 进行性能优化的最新信息，请参阅Amazon S3 的性能准则和Amazon S3 的性能设计模式。
+
+## A user is testing a new service that receives location updates from 3,600 rental cars every hour. Which service will collect data and automatically scale to accommodate production workload?
+
+A. Amazon EC2
+B. Amazon Kinesis Firehose
+C. Amazon EBS
+D. Amazon API Gateway
+
+Answer: B
+
+* 分析：又是一道争议题，大部分给出的答案是B，就应用场景上看Kinesis更适合实时计算场景。
+
+## A Solutions Architect is designing a web application. The web and application tiers need to access the Internet, but they cannot be accessed from the Internet. Which of the following steps is required?
+
+A. Attach an Elastic IP address to each Amazon EC2 instance and add a route from the private subnet to the public subnet.
+B. Launch a NAT gateway in the public subnet and add a route to it from the private subnet.
+C. Launch Amazon EC2 instances in the public subnet and change the security group to allow outbound traffic on port 80.
+D. Launch a NAT gateway in the private subnet and deploy a NAT instance in the private subnet.
+
+Answer: B
+
+## An application stack includes an Elastic Load Balancer in a public subnet, a fleet of Amazon EC2 instances in an Auto Scaling group, and an Amazon RDS MySQL cluster. Users connect to the application from the Internet. The application servers and database must be secure. How should a Solutions Architect perform this task?
+
+A. Create a private subnet for the Amazon EC2 instances and a public subnet for the Amazon RDS cluster.
+B. Create a private subnet for the Amazon EC2 instances and a private subnet for the Amazon RDS cluster.
+C. Create a public subnet for the Amazon EC2 instances and a private subnet for the Amazon RDS cluster.
+D. Create a public subnet for the Amazon EC2 instances and a public subnet for the Amazon RDS cluster.
+
+Answer: B
+
+* 分析：答案给出的是C，有多种方式证明这个答案是错误的。
+* How do I connect a public-facing load balancer to EC2 instances that have private IP addresses?(https://amazonaws-china.com/premiumsupport/knowledge-center/public-load-balancer-private-ec2/)
+* AWS Best Practices: 3-Tier Infrastructure(https://blog.stratus10.com/aws-best-practices-3-tier-infrastructure)
+
+## A Solutions Architect is designing a solution for a media company that will stream large amounts of data from an Amazon EC2 instance. The data streams are typically large and sequential, and must be able to support up to 500 MB/s. Which storage type will meet the performance requirements of this application?
+
+A. EBS Provisioned IOPS SSD
+B. EBS General Purpose SSD
+C. EBS Cold HDD
+D. EBS Throughput Optimized HDD
+
+Answer: D
+
+## (争议)A legacy application running in premises requires a Solutions Architect to be able to open a firewall to allow access to several Amazon S3 buckets. The Architect has a VPN connection to AWS in place. How should the Architect meet this requirement?
+
+A. Create an IAM role that allows access from the corporate network to Amazon S3.
+B. Configure a proxy on Amazon EC2 and use an Amazon S3 VPC endpoint.
+C. Use Amazon API Gateway to do IP whitelisting.
+D. Configure IP whitelisting on the customer's gateway.
+
+Answer: B
+
+* 分析：争议较大的一道题，这里采用了这个解释：https://d0.awsstatic.com/aws-answers/Accessing_VPC_Endpoints_from_Remote_Networks.pdf
+
+## A Solutions Architect is designing a database solution that must support a high rate of random disk reads and writes. It must provide consistent performance, and requires long-term persistence. Which storage solution BEST meets these requirements?
+
+A. An Amazon EBS Provisioned IOPS volume
+B. An Amazon EBS General Purpose volume
+C. An Amazon EBS Magnetic volume
+D. An Amazon EC2 Instance Store
+
+Answer: A
+
+## A Solutions Architect is designing solution with AWS Lambda where different environments require different database passwords. What should the Architect do to accomplish this in a secure and scalable way?
+
+A. Create a Lambda function for each individual environment.
+B. Use Amazon DynamoDB to store environmental variables.
+C. Use encrypted AWS Lambda environmental variables.
+D. Implement a dedicated Lambda function for distributing variables.
+
+Answer: C
+
+## A news organization plans to migrate their 20 TB video archive to AWS. The files are rarely accessed, but when they are, a request is made in advance and a 3 to 5-hour retrieval time frame is acceptable. However, when there is a breaking news story, the editors require access to archived footage within minutes. Which storage solution meets the needs of this organization while providing the LOWEST cost of storage?
+
+A. Store the archive in Amazon S3 Reduced Redundancy Storage.
+B. Store the archive in Amazon Glacier and use standard retrieval for all content.
+C. Store the archive in Amazon Glacier and pay the additional charge for expedited retrieval when needed.
+D. Store the archive in Amazon S3 with a lifecycle policy to move this to S3 Infrequent Access after 30 days.
+
+Answer: C
+
+> 问：从 Amazon S3 Glacier 检索数据如何收费？
+>
+> 从 Amazon S3 Glacier 检索数据的方式有三种：加急、标准和批量检索。每种方式具有不同的每 GB 检索费和每存档请求费（即请求一个存档计为一个请求）。有关不同 AWS 区域的 S3 Glacier 定价的详细信息，请访问 Amazon S3 Glacier 定价页面。
+>
+> 定价标准： https://amazonaws-china.com/cn/glacier/pricing/
+
+## A Solutions Architect is building a multi-tier website. The web servers will be in a public subnet, and the database servers will be in a private subnet. Only the web servers can be accessed from the Internet. The database servers must have Internet access for software updates. Which solution meets the requirements?
+
+A. Assign Elastic IP addresses to the database instances.
+B. Allow Internet traffic on the private subnet through the network ACL.
+C. Use a NAT Gateway.
+D. Use an egress-only Internet Gateway.
+
+Answer: C
+
+## A Solutions Architect is designing a Lambda function that calls an API to list all running Amazon RDS instances. How should the request be authorized?
+
+A. Create an IAM access and secret key, and store it in the Lambda function.
+B. Create an IAM role to the Lambda function with permissions to list all Amazon RDS instances.
+C. Create an IAM role to Amazon RDS with permissions to list all Amazon RDS instances.
+D. Create an IAM access and secret key, and store it in an encrypted RDS database.
+
+Answer: B
+
+> 教程：配置 Lambda 函数以访问 Amazon VPC 中的 Amazon RDS
+>
+> 打开 IAM 控制台中的“角色”页面。
+> 选择 Create role (创建角色)。
+> 创建具有以下属性的角色。
+> Trusted entity (可信任的实体) – Lambda.
+> 权限 – AWSLambdaVPCAccessExecutionRole。
+> 角色名称 (角色名称) – lambda-vpc-role。
+> AWSLambdaVPCAccessExecutionRole 具有函数管理与 VPC 的网络连接所需的权限。
+
+## A Solutions Architect is building an application on AWS that will require 20,000 IOPS on a particular volume to support a media event. Once the event ends, the IOPS need is no longer required. The marketing team asks the Architect to build the platform to optimize storage without incurring downtime. How should the Architect design the platform to meet these requirements?
+
+A. Change the Amazon EC2 instant types.
+B. Change the EBS volume type to Provisioned IOPS.
+C. Stop the Amazon EC2 instance and provision IOPS for the EBS volume.
+D. Enable an API Gateway to change the endpoints for the Amazon EC2 instances.
+
+Answer: B
+
+> 打开 Amazon EC2 控制台 https://console.aws.amazon.com/ec2/。
+>
+> 选择 Volumes，选择要修改的卷，然后依次选择 Actions、Modify Volume。
+>
+> Modify Volume 窗口显示卷 ID 和卷的当前配置，包括类型、大小和 IOPS。您可以在单个操作中更改任何或所有这些设置。设置新的配置值，如下所述：
+>
+> 要修改类型，请为 Volume Type 选择一个值。
+>
+> 要修改大小，请为 Size 输入一个允许的整数值。
+>
+> 如果选择预配置 IOPS SSD (io1) 作为卷类型，请为 IOPS 输入一个允许的整数值。
+>
+> 完成更改卷设置后，请选择 Modify (修改)。当系统提示您确认时，请选择 Yes。
+>
+> 在扩展卷的文件系统以使用新的存储容量之前，修改卷大小没有实际效果。有关更多信息，请参阅调整卷大小后扩展 Linux 文件系统。
+
+## A Solutions Architect is building a new feature using a Lambda to create metadata when a user uploads a picture to Amazon S3. All metadata must be indexed. Which AWS service should the Architect use to store this metadata?
+
+A. Amazon S3
+B. Amazon DynamoDB
+C. Amazon Kinesis
+D. Amazon EFC
+
+Answer: B
+
+* Building and Maintaining an Amazon S3 Metadata Index without Servers(https://amazonaws-china.com/cn/blogs/big-data/building-and-maintaining-an-amazon-s3-metadata-index-without-servers)
+
+> In this post, I walk through an approach for building such an index using Amazon DynamoDB and AWS Lambda. With these technologies, you can create a high performance, low-cost index that scales and remains highly available without the need to maintain traditional servers.
+
+## An interactive, dynamic website runs on Amazon EC2 instances in a single subnet behind an ELB Classic Load Balancer. Which design changes will make the site more highly available?
+
+A. Move some Amazon EC2 instances to a subnet in a different way(different AZ).
+B. Move the website to Amazon S3.
+C. Change the ELB to an Application Load Balancer.
+D. Move some Amazon EC2 instances to a subnet in the same Availability Zone.
+
+Answer: A
+
+* 分析：这道题的选项A可能是写错了，根据评论区是different AZ，那么选择A就比较容易理解了。评论区有一种声音是选择C，但是从高可用性上讲，C选项并没有实质的价值。

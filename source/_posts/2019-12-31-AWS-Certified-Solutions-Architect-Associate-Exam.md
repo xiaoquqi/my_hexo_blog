@@ -818,3 +818,107 @@ D. Move some Amazon EC2 instances to a subnet in the same Availability Zone.
 Answer: A
 
 * 分析：这道题的选项A可能是写错了，根据评论区是different AZ，那么选择A就比较容易理解了。评论区有一种声音是选择C，但是从高可用性上讲，C选项并没有实质的价值。
+
+## A Solutions Architect is designing a web application that is running on an Amazon EC2 instance. The application stores data in DynamoDB. The Architect needs to secure access to the DynamoDB table. What combination of steps does AWS recommend to achieve secure authorization? (Select two.)
+
+A. Store an access key on the Amazon EC2 instance with rights to the Dynamo DB table.
+B. Attach an IAM user to the Amazon EC2 instance.
+C. Create an IAM role with permissions to write to the DynamoDB table.
+D. Attach an IAM role to the Amazon EC2 instance.
+E. Attach an IAM policy to the Amazon EC2 instance.
+
+Answer: CD
+
+* 分析：AWS一向重视安全性，所以更推荐使用STS方式进行接口调用
+
+## (争议)A Solutions Architect is about to deploy an API on multiple EC2 instances in an Auto Scaling group behind an ELB. The support team has the following operational requirements:
+1 They get an alert when the requests per second go over 50,000
+2 They get an alert when latency goes over 5 seconds
+3 They can validate how many times a day users call the API requesting highly-sensitive data
+Which combination of steps does the Architect need to take to satisfy these operational requirements? (Select two.)
+
+A. Ensure that CloudTrail is enabled.
+B. Create a custom CloudWatch metric to monitor the API for data access.
+C. Configure CloudWatch alarms for any metrics the support team requires.
+D. Ensure that detailed monitoring for the EC2 instances is enabled.
+E. Create an application to export and save CloudWatch metrics for longer term trending analysis.
+
+Answer: BC
+
+* 分析：原题给出的答案是BD，但是EC2的详细监控其实并没有包含API级别的监控，ELB的监控才包含了API访问的监控。
+
+## (争议)A Solutions Architect is designing a highly-available website that is served by multiple web servers hosted outside of AWS. If an instance becomes unresponsive, the Architect needs to remove it from the rotation. What is the MOST efficient way to fulfill this requirement?
+
+A. Use Amazon CloudWatch to monitor utilization.
+B. Use Amazon API Gateway to monitor availability.
+C. Use an Amazon Elastic Load Balancer.
+D. Use Amazon Route 53 health checks.
+
+Answer: A
+
+* 分析：不同网站给出不同答案，原网站给出的答案是C，但是从题目分析关键词是the Architect needs to remove it，所以看起来A更合理一些。但是ELB增加health check之后应该可以自动的将不可用节点移除掉。
+
+## A company hosts a popular web application. The web application connects to a database running in a private VPC subnet. The web servers must be accessible only to customers on an SSL connection. The RDS MySQL database server must be accessible only from the web servers. How should the Architect design a solution to meet the requirements without impacting running applications?
+
+A. Create a network ACL on the web server's subnet, and allow HTTPS inbound and MySQL outbound. Place both database and web servers on the same subnet.
+B. Open an HTTPS port on the security group for web servers and set the source to 0.0.0.0/0. Open the MySQL port on the database security group and attach it to the MySQL instance. Set the source to Web Server Security Group.
+C. Create a network ACL on the web server's subnet, and allow HTTPS inbound, and specify the source as 0.0.0.0/0. Create a network ACL on a database subnet, allow MySQL port inbound for web servers, and deny all outbound traffic.
+D. Open the MySQL port on the security group for web servers and set the source to 0.0.0.0/0. Open the HTTPS port on the database security group and attach it to the MySQL instance. Set the source to Web Server Security Group.
+
+Answer: B
+
+## Which service should an organization use if it requires an easily managed and scalable platform to host its web application running on Nginx?
+
+A. AWS Lambda
+B. Auto Scaling
+C. AWS Elastic Beanstalk
+D. Elastic Load Balancing
+
+Answer: C
+
+> AWS Elastic Beanstalk 是一项易于使用的服务，用于在熟悉的服务器（例如 Apache 、Nginx、Passenger 和 IIS ）上部署和扩展使用 Java、.NET、PHP、Node.js、Python、Ruby、GO 和 Docker 开发的 Web 应用程序和服务。
+> 您只需上传代码，Elastic Beanstalk 即可自动处理包括容量预配置、负载均衡、自动扩展和应用程序运行状况监控在内的部署工作。同时，您能够完全控制为应用程序提供支持的 AWS 资源，并可以随时访问底层资源。
+> Elastic Beanstalk 不额外收费 – 您只需为存储和运行应用程序所需的 AWS 资源付费。
+
+## An Administrator is hosting an application on a single Amazon EC2 instance, which users can access by the public hostname. The administrator is adding a second instance, but does not want users to have to decide between many public hostnames. Which AWS service will decouple the users from specific Amazon EC2 instances?
+
+A. Amazon SQS
+B. Auto Scaling group
+C. Amazon EC2 security group
+D. Amazon ELB
+
+Answer: D
+
+* 分析：这道题原网站给出答案是B，但是明显应该是D
+
+## A Solutions Architect is designing a microservices-based application using Amazon ECS. The application includes a WebSocket component, and the traffic needs to be distributed between microservices based on the URL. Which service should the Architect choose to distribute the workload?
+
+A. ELB Classic Load Balancer
+B. Amazon Route 53 DNS
+C. ELB Application Load Balancer
+D. Amazon CloudFront
+
+Answer: C
+
+* 参考链接：https://docs.aws.amazon.com/aws-technical-content/latest/microservices-on-aws/microservices-on-aws.pdf?icmpid=link_from_whitepapers_page
+
+## A Solutions Architect is designing the storage layer for a production relational database. The database will run on Amazon EC2. The database is accessed by an application that performs intensive reads and writes, so the database requires the LOWEST random I/O latency. Which data storage method fulfills the above requirements?
+
+A. Store data in a filesystem backed by Amazon Elastic File System (EFS).
+B. Store data in Amazon S3 and use a third-party solution to expose Amazon S3 as a filesystem to the database server.
+C. Store data in Amazon Dynamo DB and emulate relational database semantics.
+D. Stripe data across multiple Amazon EBS volumes using RAID 0.
+
+Answer: D
+
+## A Solutions Architect is designing a VPC. Instances in a private subnet must be able to establish IPv6 traffic to the Internet. The design must scale automatically and not incur any additional cost. This can be accomplished with:
+
+A. an egress-only internet gateway
+B. a NAT gateway
+C. a custom NAT instance
+D. a VPC endpoint
+
+Answer: A
+
+* 参考链接：https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html
+> An egress-only Internet gateway. This enables instances in the private subnet to send requests to the Internet over IPv6 (for example, for software updates). An egress-only Internet gateway is necessary if you want instances in the private subnet to be able to initiate communication with the Internet over IPv6. For more information, see Egress-Only Internet Gateways.

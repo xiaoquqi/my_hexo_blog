@@ -922,3 +922,120 @@ Answer: A
 
 * 参考链接：https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html
 > An egress-only Internet gateway. This enables instances in the private subnet to send requests to the Internet over IPv6 (for example, for software updates). An egress-only Internet gateway is necessary if you want instances in the private subnet to be able to initiate communication with the Internet over IPv6. For more information, see Egress-Only Internet Gateways.
+
+## A web application stores all data in an Amazon RDS Aurora database instance. A Solutions Architect wants to provide access to the data for a detailed report for the Marketing team, but is concerned that the additional load on the database will affect the performance of the web application. How can the report be created without affecting the performance of the application?
+
+A. Create a read replica of the database.
+B. Provision a new RDS instance as a secondary master.
+C. Configure the database to be in multiple regions.
+D. Increase the number of provisioned storage IOPS.
+
+Answer: A
+
+* 分析：原有网站给出的答案是B，明显是A，搞这么复杂干啥
+
+## A company has an application that stores sensitive data. The company is required by government regulations to store multiple copies of its data. What would be the MOST resilient and cost-effective option to meet this requirement?
+
+A. Amazon EFS
+B. Amazon RDS
+C. AWS Storage Gateway
+D. Amazon S3
+
+Answer: D
+
+## A company is using AWS Key Management Service (AWS KMS) to secure their Amazon RDS databases. An auditor has recommended that the company log all use of their AWS KMS keys. What is the SIMPLEST solution?
+
+A. Associate AWS KMS metrics with Amazon CloudWatch.
+B. Use AWS CloudTrail to log AWS KMS key usage.
+C. Deploy a monitoring agent on the RDS instances.
+D. Poll AWS KMS periodically with a scheduled job.
+
+Answer: B
+
+## A Solutions Architect is designing a stateful web application that will run for one year (24/7) and then be decommissioned. Load on this platform will be constant, using a number of r4.8xlarge instances. Key drivers for this system include high availability, but elasticity is not required. What is the MOST cost-effective way to purchase compute for this platform?
+
+A. Scheduled Reserved Instances
+B. Convertible Reserved Instances
+C. Standard Reserved Instances
+D. Spot Instances
+
+Answer: C
+
+* 分析：根据题目要求7*24小时不停机，所以需要排除A和D两个选项, B选项在这个场景下并不需要，所以选C
+
+> Exchanging Convertible Reserved Instances: You can exchange one or more Convertible Reserved Instances for another Convertible Reserved Instance with a different configuration, including instance family, operating system, and tenancy. There are no limits to how many times you perform an exchange, as long as the target Convertible Reserved Instance is of an equal or higher value than the Convertible Reserved Instances that you are exchanging.
+
+## A media company asked a Solutions Architect to design a highly available storage solution to serve as a centralized document store for their Amazon EC2 instances. The storage solution needs to be POSIX-compliant, scale dynamically, and be able to serve up to 100 concurrent EC2 instances. Which solution meets these requirements?
+
+A. Create an Amazon S3 bucket and store all of the documents in this bucket.
+B. Create an Amazon EBS volume and allow multiple users to mount that volume to their EC2 instance(s).
+C. Use Amazon Glacier to store all of the documents.
+D. Create an Amazon Elastic File System (Amazon EFS) to store and share the documents.
+
+Answer: D
+
+* 分析：需要文件接口，并且同时访问，那么只有EFS能够满足
+
+## A Solution Architect has a two-tier application with a single Amazon EC2 instance web server and Amazon RDS MySQL Multi-AZ DB instances. The Architect is re-architecting the application for high availability by adding instances in a second Availability Zone. Which additional services will improve the availability of the application? (Choose two.)
+
+A. Auto Scaling group
+B. AWS CloudTrail
+C. ELB Classic Load Balancer
+D. Amazon DynamoDB
+E. Amazon ElastiCache
+
+Answer: AC
+
+* 分析：原网站给出的答案是AE，E显然没什么用对于目标
+
+## A company is migrating its data center to AWS. As part of this migration, there is a three-tier web application that has strict data-at-rest encryption requirements. The customer deploys this application on Amazon EC2 using Amazon EBS, and now must provide encryption at-rest. How can this requirement be met without changing the application?
+
+A. Use AWS Key Management Service and move the encrypted data to Amazon S3.
+B. Use an application-specific encryption API with AWS server-side encryption.
+C. Use encrypted EBS storage volumes with AWS-managed keys.
+D. Use third-party tools to encrypt the EBS data volumes with Key Management Service Bring Your Own Keys.
+ 
+Answer: C
+
+## A Solutions Architect is developing software on AWS that requires access to multiple AWS services, including an Amazon EC2 instance. This is a security sensitive application, and AWS credentials such as Access Key ID and Secret Access Key need to be protected and cannot be exposed anywhere in the system. What security measure would satisfy these requirements?
+
+A. Store the AWS Access Key ID/Secret Access Key combination in software comments.
+B. Assign an IAM user to the Amazon EC2 instance.
+C. Assign an IAM role to the Amazon EC2 instance.
+D. Enable multi-factor authentication for the AWS root account.
+
+Answer: C
+
+## An AWS workload in a VPC is running a legacy database on an Amazon EC2 instance. Data is stored on a 200GB Amazon EBS (gp2) volume. At peak load times, logs show excessive wait time. What solution should be implemented to improve database performance using persistent storage?
+
+A. Migrate the data on the Amazon EBS volume to an SSD-backed volume.
+B. Change the EC2 instance type to one with EC2 instance store volumes.
+C. Migrate the data on the EBS volume to provisioned IOPS SSD (io1).
+D. Change the EC2 instance type to one with burstable performance.
+
+Answer: C
+
+* 分析：原有答案给出的是D，但是从性能角度看C明显是正确的
+
+## A company's website receives 50,000 requests each second, and the company wants to use multiple applications to analyze the navigation patterns of the users on their website so that the experience can be personalized. What can a Solutions Architect use to collect page clicks for the website and process them sequentially for each user?
+
+A. Amazon Kinesis Stream
+B. Amazon SQS standard queue
+C. Amazon SQS FIFO queue
+D. AWS CloudTrail trail
+
+Answer: A
+
+* Create real-time clickstream sessions and run analytics with Amazon Kinesis Data Analytics, AWS Glue, and Amazon Athena(https://aws.amazon.com/cn/blogs/big-data/create-real-time-clickstream-sessions-and-run-analytics-with-amazon-kinesis-data-analytics-aws-glue-and-amazon-athena/)
+* Amazon Kinesis – Real-Time Processing of Streaming Big Data(https://aws.amazon.com/cn/blogs/aws/amazon-kinesis-real-time-processing-of-streamed-data/)
+
+## A company wants to migrate a highly transactional database to AWS. Requirements state that the database has more than 6 TB of data and will grow exponentially. Which solution should a Solutions Architect recommend?
+
+A. Amazon Aurora
+B. Amazon Redshift
+C. Amazon DynamoDB
+D. Amazon RDS MySQL
+
+Answer: A
+
+* 分析：A和D的区别没有找到合适的解释，Aurora的扩展性更好，而且是AWS云原生的。

@@ -994,7 +994,7 @@ A. Use AWS Key Management Service and move the encrypted data to Amazon S3.
 B. Use an application-specific encryption API with AWS server-side encryption.
 C. Use encrypted EBS storage volumes with AWS-managed keys.
 D. Use third-party tools to encrypt the EBS data volumes with Key Management Service Bring Your Own Keys.
- 
+
 Answer: C
 
 ## A Solutions Architect is developing software on AWS that requires access to multiple AWS services, including an Amazon EC2 instance. This is a security sensitive application, and AWS credentials such as Access Key ID and Secret Access Key need to be protected and cannot be exposed anywhere in the system. What security measure would satisfy these requirements?
@@ -1039,3 +1039,122 @@ D. Amazon RDS MySQL
 Answer: A
 
 * 分析：A和D的区别没有找到合适的解释，Aurora的扩展性更好，而且是AWS云原生的。
+
+## (争议)A company hosts a two-tier application that consists of a publicly accessible web server that communicates with a private database. Only HTTPS port 443 traffic to the web server must be allowed from the Internet. Which of the following options will achieve these requirements? (Choose two.)
+
+A. Security group rule that allows inbound Internet traffic for port 443.
+B. Security group rule that denies all inbound Internet traffic except port 443.
+C. Network ACL rule that allows port 443 inbound and all ports outbound for Internet traffic.
+D. Security group rule that allows Internet traffic for port 443 in both inbound and outbound.
+E. Network ACL rule that allows port 443 for both inbound and outbound for all Internet traffic.
+
+Answer: AC
+
+* 分析：答案给出的是AE，根据Network ACL的描述，默认情况为白名单，是无状态性的，返回的端口不会自动允许，所以需要C选项打开所有返回的端口。
+* 临时端口(https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-network-acls.html#nacl-ephemeral-ports)
+
+> 临时端口
+> 上一个部分中的网络 ACL 实例使用了临时端口范围 32768-65535。但是，您可能需要根据自己使用的或作为通信目标的客户端的类型为网络 ACL 使用不同的范围。
+> 发起请求的客户端会选择临时端口范围。根据客户端的操作系统不同，范围也随之更改。
+> 许多 Linux 内核（包括 Amazon Linux 内核）使用端口 32768-61000。
+> 生成自 Elastic Load Balancing 的请求使用端口 1024-65535。
+> Windows 操作系统通过 Windows Server 2003 使用端口 1025-5000。
+> Windows Server 2008 及更高版本使用端口 49152-65535。
+> NAT 网关使用端口 1024 - 65535。
+> AWS Lambda 函数使用端口 1024-65535。
+> 例如，如果一个来自 Internet 上的 Windows XP 客户端的请求到达您的 VPC 中的 Web 服务器，则您的网络 ACL 必须有相应的出站规则，以支持目标为端口 1025-5000 的数据流。
+> 如果您的 VPC 中的一个实例是发起请求的客户端，则您的网络 ACL 必须有入站规则来支持发送到实例类型（Amazon Linux、Windows Server 2008 等）特有的临时端口的数据流。
+> 在实际中，为使不同客户端类型可以启动流量进入您 VPC 中的公有实例，您可以开放临时端口 1024-65535。但是，您也可以在 ACL 中添加规则以拒绝任何在此范围内的来自恶意端口的数据流。请务必将拒绝 规则放在表的较前端，先于开放一系列临时端口的允许 规则。
+
+## A Solutions Architect is designing an Amazon VPC. Applications in the VPC must have private connectivity to Amazon DynamoDB in the same AWS Region. The design should route DynamoDB traffic through:
+
+A. VPC peering connection.
+B. NAT gateway
+C. VPC endpoint
+D. AWS Direct Connect
+
+Answer: C
+
+## A Solutions Architect is architecting a workload that requires a performant object-based storage system that must be shared with multiple Amazon EC2 instances. Which AWS service meets this requirement?
+
+A. Amazon EFS
+B. Amazon S3
+C. Amazon EBS
+D. Amazon ElastiCache
+
+Answer: B
+
+* 分析：这道题给出的答案竟然是A，不明白这个网站是不是专门负责坑人的。object-based storage system，很明显是S3.
+
+## A Solutions Architect is developing a solution for sharing files in an organization. The solution must allow multiple users to access the storage service at once from different virtual machines and scale automatically. It must also support file-level locking. Which storage service meets the requirements of this use case?
+
+A. Amazon S3
+B. Amazon EFS
+C. Amazon EBS
+D. Cached Volumes
+
+Answer: B
+
+## A company runs a legacy application with a single-tier architecture on an Amazon EC2 instance. Disk I/O is low, with occasional small spikes during business hours. The company requires the instance to be stopped from 8 PM to 8 AM daily. Which storage option is MOST appropriate for this workload?
+
+A. Amazon EC2 instance storage
+B. Amazon EBS General Purpose SSD (gp2) storage
+C. Amazon S3
+D. Amazon EBS Provision IOPS SSD (io1) storage
+
+Answer: B
+
+* 分析：原始答案给出的是C，一个legcy application为什么会用S3呢？这可是需要应用改造的。
+
+## (争议)As part of securing an API layer built on Amazon API gateway, a Solutions Architect has to authorize users who are currently authenticated by an existing identity provider. The users must be denied access for a period of one hour after three unsuccessful attempts. How can the Solutions Architect meet these requirements?
+
+A. Use AWS IAM authorization and add least-privileged permissions to each respective IAM role.
+B. Use an API Gateway custom authorizer to invoke an AWS Lambda function to validate each user's identity.
+C. Use Amazon Cognito user pools to provide built-in user management.
+D. Use Amazon Cognito user pools to integrate with external identity providers.
+
+Answer: B
+
+* 分析：正义点在答案D，参考链接：https://serverless-stack.com/chapters/cognito-user-pool-vs-identity-pool.html
+
+## An organization runs an online media site, hosted on-premises. An employee posted a product review that contained videos and pictures. The review went viral and the organization needs to handle the resulting spike in website traffic. What action would provide an immediate solution?
+
+A. Redesign the website to use Amazon API Gateway, and use AWS Lambda to deliver content.
+B. Add server instances using Amazon EC2 and use Amazon Route 53 with a failover routing policy.
+C. Serve the images and videos via an Amazon CloudFront distribution created using the news site as the origin.
+D. Use Amazon ElasticCache for Redis for caching and reducing the load requests from the origin.
+
+Answer: C
+
+## A client notices that their engineers often make mistakes when creating Amazon SQS queues for their backend system. Which action should a Solutions Architect recommend to improve this process?
+
+A. Use the AWS CLI to create queues using AWS IAM Access Keys.
+B. Write a script to create the Amazon SQS queue using AWS Lambda.
+C. Use AWS Elastic Beanstalk to automatically create the Amazon SQS queues.
+D. Use AWS CloudFormation Templates to manage the Amazon SQS queue creation.
+
+Answer: D
+
+* 教程：创建 Amazon SQS 队列(https://docs.aws.amazon.com/zh_cn/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-create-queue.html#create-queue-cloudformation)
+
+## (争议)A development team is building an application with front-end and backend application tiers. Each tier consists of Amazon EC2 instances behind an ELB Classic Load Balancer. The instances run in Auto Scaling groups across multiple Availability Zones. The network team has allocated the 10.0.0.0/24 address space for this application. Only the front-end load balancer should be exposed to the Internet. There are concerns about the limited size of the address space and the ability of each tier to scale. What should the VPC subnet design be in each Availability Zone?
+
+A. One public subnet for the load balancer tier, one public subnet for the front-end tier, and one private subnet for the backend tier.
+B. One shared public subnet for all tiers of the application.
+C. One public subnet for the load balancer tier and one shared private subnet for the application tiers.
+D. One shared private subnet for all tiers of the application.
+
+Answer: C
+
+* 分析：答案给出的是A，但是题目中说道only the front-end load balancer should be exposed to the internet，所以A答案中为front-end tier一个公网subnet有点多余了
+
+## A Solutions Architect must select the storage type for a big data application that requires very high sequential I/O. The data must persist if the instance is stopped. Which of the following storage types will provide the best fit at the LOWEST cost for the application?
+
+A. An Amazon EC2 instance store local SSD volume.
+B. An Amazon EBS provisioned IOPS SSD volume.
+C. An Amazon EBS throughput optimized HDD volume.
+D. An Amazon EBS general purpose SSD volume.
+
+Answer: C
+
+* 分析：这道题需要高顺序I/O和低成本，显然C正确

@@ -182,3 +182,59 @@ C. Amazon RDS MySQL
 D. Amazon Redshift
 
 Answer: D
+
+## A media company has deployed a multi-tier architecture on AWS. Web servers are deployed in two Availability Zones using an Auto Scaling group with a default Auto Scaling termination policy. The web servers' Auto Scaling group currently has 15 instances running. Which instance will be terminated first during a scale-in operation?
+
+A. The instance with the oldest launch configuration.
+B. The instance in the Availability Zone that has most instances.
+C. The instance closest to the next billing hour.
+D. The oldest instance in the group.
+
+Answer: B
+
+* 控制在缩小过程中终止哪些 Auto Scaling 实例(https://docs.aws.amazon.com/zh_cn/autoscaling/ec2/userguide/as-instance-termination.html#default-termination-policy)
+
+> 当达到缩减策略的阈值时，策略生效，Auto Scaling 组终止其中一个实例。如果您没有为该组分配特定的终止策略，则使用默认终止策略。它选择有两个实例的可用区，并终止从最旧启动配置启动的实例。如果这些实例是从同一启动配置启动的，则 Auto Scaling 组选择最接近下一个计费小时的实例并终止该实例。
+
+## A retail company has sensors placed in its physical retail stores. The sensors send messages over HTTP when customers interact with in-store product displays. A Solutions Architect needs to implement a system for processing those sensor messages; the results must be available for the Data Analysis team. Which architecture should be used to meet these requirements?
+
+A. Implement an Amazon API Gateway to server as the HTTP endpoint. Have the API Gateway trigger an AWS Lambda function to process the messages, and save the results to an Amazon DynamoDB table.
+B. Create an Amazon EC2 instance to server as the HTTP endpoint and to process the messages. Save the results to Amazon S3 for the Data Analysis team to download.
+C. Use Amazon Route 53 to direct incoming sensor messages to a Lambda function to process the message and save the results to a Amazon DynamoDB table.
+D. Use AWS Direct Connect to connect sensors to DynamoDB so that data can be written directly to a DynamoDB table where it can be accessed by the Data Analysis team.
+
+Answer: A
+
+* 分析：原来AWS Lambda的HTTP trigger是这么实现的
+
+## A client is migrating a legacy web application to the AWS Cloud. The current system uses an Oracle database as a relational database management system solution. Backups occur every night, and the data is stored on-premises. The Solutions Architect must automate the backups and identity a storage solution while keeping costs low. Which AWS service will meet these requirements?
+
+A. Amazon RDS
+B. Amazon RedShift
+C. Amazon DynamoDB Accelerator
+D. Amazon ElastiCache
+
+Answer: A
+
+## (争议)A company has an Amazon RDS database backing its production website. The Sales team needs to run queries against the database to track training program effectiveness. Queries against the production database cannot impact performance, and the solution must be easy to maintain. How can these requirements be met?
+
+A. Use an Amazon Redshift database. Copy the product database into Redshift and allow the team to query it.
+B. Use an Amazon RDS read replica of the production database and allow the team to query against it.
+C. Use multiple Amazon EC2 instances running replicas of the production database, placed behind a load balancer.
+D. Use an Amazon DynamoDB table to store a copy of the data.
+
+Answer: B
+
+* 争议：原有答案给出的是A，根据题目描述看起来是一个数据仓库的需求。从easy to maintain的角度说B，更简单
+
+## A company must collect temperature data from thousands of remote weather devices. The company must also store this data in a data warehouse to run aggregations and visualizations. Which services will meet these requirements? (Choose two.)
+
+A. Amazon Kinesis Data Firehouse
+B. Amazon SQS
+C. Amazon Redshift
+D. Amazon SNS
+E. Amazon DynamoDB
+
+Answer: AC
+
+* 分析：A负责接收数据并处理，C作为数据仓库存储下来

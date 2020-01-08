@@ -1158,3 +1158,116 @@ D. An Amazon EBS general purpose SSD volume.
 Answer: C
 
 * 分析：这道题需要高顺序I/O和低成本，显然C正确
+
+## Two Auto Scaling applications, Application A and Application B, currently run within a shared set of subnets. A Solutions Architect wants to make sure that Application A can make requests to Application B, but Application B should be denied from making requests to Application A. Which is the SIMPLEST solution to achieve this policy?
+
+A. Using security groups that reference the security groups of the other application
+B. Using security groups that reference the application server's IP addresses
+C. Using Network Access Control Lists to allow/deny traffic based on application IP addresses
+D. Migrating the applications to separate subnets from each other
+
+Answer: A
+
+## Legacy applications currently send messages through a single Amazon EC2 instance, which then routes the messages to the appropriate destinations. The Amazon EC2 instance is a bottleneck and single point of failure, so the company would like to address these issues. Which services could address this architectural use case? (Choose two.)
+
+A. Amazon SNS
+B. AWS STS
+C. Amazon SQS
+D. Amazon Route 53
+E. AWS Glue
+
+Answer: AC
+
+* 分析：根据题目是要解决消息的问题，消息服务有两种SNS和SQS，因为题目里并没有说消息模式，所以这两种也许能解决需求。
+
+## A Solutions Architect needs to design an architecture for a new, mission-critical batch processing billing application. The application is required to run Monday, Wednesday, and Friday from 5 AM to 11 AM. Which is the MOST cost-effective Amazon EC2 pricing model?
+
+A. Amazon EC2 Spot Instances
+B. On-Demand Amazon EC2 Instances
+C. Scheduled Reserved Instances
+D. Dedicated Amazon EC2 Instances
+
+Answer: C
+
+## A workload consists of downloading an image from an Amazon S3 bucket, processing the image, and moving it to another Amazon S3 bucket. An Amazon EC2 instance runs a scheduled task every hour to perform the operation. How should a Solutions Architect redesign the process so that it is highly available?
+
+A. Change the Amazon EC2 instance to compute optimized.
+B. Launch a second Amazon EC2 instance to monitor the health of the first.
+C. Trigger a Lambda function when a new object is uploaded.
+D. Initially copy the images to an attached Amazon EBS volume.
+
+Answer: C
+
+* 分析：Lambda的触发器很适合做这个
+
+## An application is running on an Amazon EC2 instance in a private subnet. The application needs to read and write data onto Amazon Kinesis Data Streams, and corporate policy requires that this traffic should not go to the internet. How can these requirements be met?
+
+A. Configure a NAT gateway in a public subnet and route all traffic to Amazon Kinesis through the NAT gateway.
+B. Configure a gateway VPC endpoint for Kinesis and route all traffic to Kinesis through the gateway VPC endpoint.
+C. Configure an interface VPC endpoint for Kinesis and route all traffic to Kinesis through the gateway VPC endpoint.
+D. Configure an AWS Direct Connect private virtual interface for Kinesis and route all traffic to Kinesis through the virtual interface.
+ 
+Answer: C
+
+* 分析：误选了B，从题目说是Kinesis需要读取EC2的数据，所以应该是在VPC interface上建立一个endpoint
+
+## A Solutions Architect is building an application that stores object data. Compliance requirements state that the data stored is immutable. Which service meets these requirements?
+
+A. Amazon S3
+B. Amazon Glacier
+C. Amazon EFS
+D. AWS Storage Gateway
+
+Answer: B
+
+> Data stored in Amazon Glacier is immutable, meaning that after an archive is created it cannot be updated. This ensures that data such as compliance and regulatory records cannot be altered after they have been archived.
+
+* 分析：从这道题我们可以看出，考试的时候选中文的重要性，不会因为一个单词意思不明确导致整个题目判断失误，关键词是immutalbe，不可改变的
+
+## (争议)A Solutions Architect is defining a shared Amazon S3 bucket where corporate applications will save objects. How can the Architect ensure that when an application uploads an object to the Amazon S3 bucket, the object is encrypted?
+
+A. Set a CORS configuration.
+B. Set a bucket policy to encrypt all Amazon S3 objects.
+C. Enable default encryption on the bucket.
+D. Set permission for users.
+
+Answer: B
+
+* 分析：争议点在于答案C，从界面操作上看BC好像是在做同一件事情
+* 如何为 Amazon S3 存储桶启用默认加密？(https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/user-guide/default-bucket-encryption.html)
+* How to Prevent Uploads of Unencrypted Objects to Amazon S3(https://aws.amazon.com/cn/blogs/security/how-to-prevent-uploads-of-unencrypted-objects-to-amazon-s3/)
+
+## An application tier currently hosts two web services on the same set of instances, listening on different ports. Which AWS service should a Solutions Architect use to route traffic to the service based on the incoming request path?
+
+A. AWS Application Load Balancer
+B. Amazon CloudFront
+C. Amazon Classic Load Balancer
+D. Amazon Route 53
+
+Answer: A
+
+## A data analytics startup company asks a Solutions Architect to recommend an AWS data store options for indexed data. The data processing engine will generate and input more than 64 TB of processed data every day, with item sizes reaching up to 300 KB. The startup is flexible with data storage and is more interested in a database that requires minimal effort to scale with a growing dataset size. Which AWS data store service should the Architect recommend?
+
+A. Amazon RDS
+B. Amazon Redshift
+C. Amazon DynamoDB
+D. Amazon S3
+
+Answer: C
+
+## (争议)A Solutions Architect needs to allow developers to have SSH connectivity to web servers. The requirements are as follows:
+✑ Limit access to users origination from the corporate network.
+✑ Web servers cannot have SSH access directly from the Internet.
+✑ Web servers reside in a private subnet.
+Which combination of steps must the Architect complete to meet these requirements? (Choose two.)
+
+A. Create a bastion host that authenticates users against the corporate directory.
+B. Create a bastion host with security group rules that only allow traffic from the corporate network.
+C. Attach an IAM role to the bastion host with relevant permissions.
+D. Configure the web servers' security group to allow SSH traffic from a bastion host.
+E. Deny all SSH traffic from the corporate network in the inbound network ACL.
+
+Answer: BD
+
+* 分析：原有答案给出的是AC，感觉并不能完全解决该问题
+* How to Record SSH Sessions Established Through a Bastion Host(https://aws.amazon.com/blogs/security/how-to-record-ssh-sessions-established-through-a-bastion-host/)

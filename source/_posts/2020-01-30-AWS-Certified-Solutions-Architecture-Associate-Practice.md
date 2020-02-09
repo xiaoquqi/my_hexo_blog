@@ -6,6 +6,14 @@ tags: [AWS, ACA Practice]
 
 该模拟题出自AWS Practice，是付费后的模拟题，一共25道题，相对来说答案比较准确，答题正确率在76%，看中文的命题相对来说对理解题目内容更简单。
 
+总得分: 76%
+主题得分:
+1.0. Design Resilient Architectures 89%
+2.0. Define Performant Architectures 71%
+3.0. Specify Secure Applications and Architectures 50%
+4.0. Design Cost-Optimized Architectures 100%
+5.0. Define Operationally Excellent Architectures 100%
+
 <!-- more -->
 
 # (*)您在us-west-2中运行一个应用程序，它需要始终运行6个EC2实例。
@@ -305,11 +313,24 @@ D. AWS CloudFormation
 
 Answer: C
 
-# (待确认)一个应用程序在S3存储桶中读取和写入小对象。在完全部署该应用程序后，读取/写入流量会非常高。
+# (*)一个应用程序在S3存储桶中读取和写入小对象。在完全部署该应用程序后，读取/写入流量会非常高。
 架构师应如何最大限度地提高Amazon S3性能？
 A. 在每个对象名称前面添加随机字符串。
 B. 使用STANDARD_IA存储类
 C. 在每个对象名称前面添加当前日期。
 D. 在S3存储桶上启用版本控制。
 
-Answer: A
+Answer: C
+
+> https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/optimizing-performance.html
+>
+> 当从 Amazon S3 上传和检索存储时，您的应用程序可以轻松地实现每秒数千个事务的请求性能。Amazon S3 会自动扩展至高请求速率。例如，您的应用程序可以在存储桶中实现至少每秒每个前缀 3,500 个 PUT/COPY/POST/DELETE 请求和 5,500 个 GET/HEAD 请求。对存储桶中的前缀数量没有限制。您可以通过并行读取来增加读取或写入性能。例如，如果您在 Amazon S3 存储桶中创建 10 个前缀以并行处理读取，则可以将读取性能扩展到每秒 55,000 个读取请求。
+> 下面的主题介绍的最佳实践准则和设计模式用于优化使用 Amazon S3 的应用程序的性能。本指南的优先级高于之前有关优化 Amazon S3 的性能的任何指南。例如，以前的 Amazon S3 性能指南建议用哈希字符来随机化前缀命名，以便优化频繁数据检索的性能。现在，您不再需要为了提高性能随机化前缀命名，而是可以对前缀使用基于顺序日期的命名方式。有关对 Amazon S3 进行性能优化的最新信息，请参阅Amazon S3 的性能准则和Amazon S3 的性能设计模式。
+
+> 2018年7月17日 Amazon S3 宣布提高请求速率性能(https://amazonaws-china.com/cn/about-aws/whats-new/2018/07/amazon-s3-announces-increased-request-rate-performance/)
+> 
+> Amazon S3 现在提供了更高的性能，支持每秒至少 3500 个数据添加请求、每秒 5500 个数据检索请求，而且无需额外费用，这可以节省大量处理时间。每个 S3 前缀均支持这些请求速率，因此可以轻松实现显著的性能提升。
+>
+> 目前在 Amazon S3 上运行的应用程序均可享受此性能改进，而无需实施任何更改；在 S3 上构建新应用程序的客户无需进行任何应用程序自定义即可享受此性能。Amazon S3 对并行请求的支持意味着您可以按照计算集群的系数扩展 S3 性能，而无需对应用程序进行任何自定义。性能按前缀扩展，因此您可以并行使用尽可能多的前缀，从而实现所需的吞吐量。前缀的数量没有限制。
+>
+> 在这种 S3 请求速率性能提升推出后，先前任何为加速性能而随机化对象前缀的指南均被淘汰。也就是说，您现在可以在 S3 对象命名中使用逻辑或顺序命名模式，而不会产生任何性能影响。所有 AWS 区域现在均已提供此改进。有关更多信息，请访问 Amazon S3 开发人员指南。

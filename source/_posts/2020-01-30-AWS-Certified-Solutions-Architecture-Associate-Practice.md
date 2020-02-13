@@ -14,6 +14,8 @@ tags: [AWS, ACA Practice]
 4.0. Design Cost-Optimized Architectures 100%
 5.0. Define Operationally Excellent Architectures 100%
 
+个人感觉，对于网络题目还是有些晕的，因为和OpenStack的SDN还是有一些区别，特别涉及到安全组、网络ACL特别含糊；另外一类题就是服务之间的互联互通时会比较晕。
+
 <!-- more -->
 
 # (*)您在us-west-2中运行一个应用程序，它需要始终运行6个EC2实例。

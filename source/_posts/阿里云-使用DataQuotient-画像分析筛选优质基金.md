@@ -21,6 +21,8 @@ tags:
 
 本教程为您演示如何从当日的1126个股票类的基金产品中，筛选出符合4433法则的69条优质基金。
 
+<!-- more -->
+
 # 实现流程
 ![upload successful](/images/pasted-0.png)
 

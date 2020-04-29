@@ -14,6 +14,8 @@ OpenStack在2010年7月由NASA和Rackspace宣布启动，2010年10月Austin Rele
 
 我是从2012年初开始参与到OpenStack社区，这几年见证了OpenStack从一个开源项目逐渐成为开源产品的全过程。大概在两三年前每次发布前都会写一些关于OpenStack新版本功能和社区分析的文章，但是随着我的工作重心转移，对OpenStack社区关注逐渐减少。
 
+<!-- more -->
+
 随着容器、K8S等新兴技术的崛起，OpenStack无疑受到了很大的冲击，在之前两年经常看到一些唱衰OpenStack的文章。但是不可否认，目前OpenStack已经进入到了一个稳定阶段，很多私有云、专有云项目都是基于OpenStack提供解决方案。所以我认为并不存在OpenStack没落一说，只是技术发展的必经阶段：当底层逐渐稳定后，关注度往上发展。
 
 同时，我们也看到，OpenStack基金会也在通过吸纳更多的项目来维持自身的影响力，比如：安全容器项目Kata Container，边缘计算项目StarlingX。

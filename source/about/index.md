@@ -4,7 +4,7 @@ date: 2019-12-18 10:04:16
 ### 个人简介
 
 * 万博智云信息科技（上海）有限公司首席技术官(CTO), 万博智云是万国数据(NASDAQ:GDS)合资子公司
-* 阿里云解决方案领域MVP
+* 阿里云解决方案领域MVP, 腾讯云TVP
 * Ceph基金会亚太区大使，Ceph中国社区联合创始人
 * 十年以上软件研发经验及研发团队管理经验，熟悉多种开发语言及架构设计
 * 2013年开始创业，丰富的创业团队管理经验，在创业过程中在云计算及开源领域积累了大量人脉，丰富的项目和客户经验和渠道拓展能力
@@ -34,10 +34,11 @@ date: 2019-12-18 10:04:16
 * 2005年01月 - 2007年01月 天津移动GSM网网络管理平台三期项目
 
 ### 云计算相关活动
+* 2020年04月 [获评腾讯云TVP](https://cloud.tencent.com/tvp/219)
 * 2020年04月 [阿里云MVP线上峰会演讲：基于阿里云原生构建迁移即服务](https://developer.aliyun.com/live/2479?spm=a2c6h.13981147.J_2374214890.2.4db91cf4dNUtdO)
 * 2020年03月 [阿里云MVP人物专访](https://developer.aliyun.com/article/747902)
 * 2020年02月 [获得阿里云最佳上云案例：万博智云基于阿里云原生构建迁移即服务](https://yq.aliyun.com/articles/746413?spm=5176.8961170.detail.10.1b00Fwm0Fwm0Hq)
-* 2019年12月 [获评解决方案领域MVP](https://mvp.aliyun.com/mvp/detail/460)
+* 2019年12月 [获评阿里云解决方案领域MVP](https://mvp.aliyun.com/mvp/detail/460)
 * 2016年11月 组织并参与Ceph中国社区年终庆典
 * 2016年11月 浪潮集团有限公司OpenStack开发课程培训讲师
 * 2016年08月 [Ceph亚太峰会(APAC)，作为Ceph中国社区代表发表演讲](http://v.youku.com/v_show/id_XMTc2Mzg5OTAzMg==.html?spm=a2h1n.8251843.playList.5!3~1!2~3~A.Nn4DGY&f=28412957&o=0#paction)

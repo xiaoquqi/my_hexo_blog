@@ -8,6 +8,7 @@ branches:
     - master # build master branch only
 before_install:
   - git clone --depth=1 https://github.com/JoeyBling/hexo-theme-yilia-plus.git themes/yilia-plus
+  - cp -rf my_themes/yilia-plus/layout/_partial/footer.ejs themes/yilia-plus/layout/_partial/footer.ejs
 script:
   - hexo generate # generate static files
   - echo "sunqi.me" > public/CNAME

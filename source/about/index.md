@@ -35,7 +35,7 @@ date: 2019-12-18 10:04:16
 
 ### 云计算相关活动
 * 2020年04月 [获评腾讯云TVP](https://cloud.tencent.com/tvp/219)
-* 2020年04月 [阿里云MVP线上峰会演讲：基于阿里云原生构建迁移即服务](https://developer.aliyun.com/live/2479?spm=a2c6h.13981147.J_2374214890.2.4db91cf4dNUtdO)
+* 2020年04月 [阿里云MVP线上峰会演讲：基于阿里云原生构建迁移即服务](https://developer.aliyun.com/live/2483)
 * 2020年03月 [阿里云MVP人物专访](https://developer.aliyun.com/article/747902)
 * 2020年02月 [获得阿里云最佳上云案例：万博智云基于阿里云原生构建迁移即服务](https://yq.aliyun.com/articles/746413?spm=5176.8961170.detail.10.1b00Fwm0Fwm0Hq)
 * 2019年12月 [获评阿里云解决方案领域MVP](https://mvp.aliyun.com/mvp/detail/460)

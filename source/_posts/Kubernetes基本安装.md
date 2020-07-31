@@ -5,6 +5,10 @@ tags:
 ---
 # Kubernetes安装及初始化
 
+研发环境搭建Kubernetes All-in-One环境搭建。
+
+<!-- more -->
+
 ## CentOS 7初始化
 
 ```
@@ -118,9 +122,9 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # 允许Master节点运行Pods
 
-···
+```
 kubectl taint nodes --all node-role.kubernetes.io/master-
-···
+```
 
 # 测试
 

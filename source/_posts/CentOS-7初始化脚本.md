@@ -5,6 +5,10 @@ tags:
 ---
 # CentOS 7初始化
 
+该安装脚本为搭建研发环境常用的脚本，记录在Blog中便于查阅。
+
+<!-- more -->
+
 ```
 # Set SELinux in permissive mode (effectively disabling it)
 setenforce 0

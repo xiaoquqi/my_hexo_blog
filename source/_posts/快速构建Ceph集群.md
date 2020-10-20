@@ -13,7 +13,7 @@ tags:
 
 我们准备四台服务器，其中一台作为部署发起节点和后续Client节点使用。另外三台作为Ceph节点使用，其中第一台节点node01上，除了monitor和osd外，还将运行Manager, MDS和RGW服务，用于提供文件及对象存储服务。每一台Ceph节点都另外挂载了一块单独的磁盘，由于我使用的是虚拟机环境，所以挂载节点为/dev/vdb，如果使用是其他环境需要注意挂载点名称。
 
-![upload successful](/images/pasted-58.png)
+![upload successful](/images/pasted-58-1.png)
 
 # 部署时序图
 
@@ -26,7 +26,7 @@ tags:
 * CephFS安装，部署Metadata服务
 * Ceph RGW安装，部署RGW服务
 
-![upload successful](/images/pasted-59.png)
+![upload successful](/images/pasted-59-1.png)
 
 # （全部节点）环境准备
 
@@ -123,6 +123,12 @@ ceph-deploy osd create --data /dev/vdb node03
 ceph -s
 ```
 
+由于默认采用了Bluestore安装方式，如果想使用SSD作为block.db和block.wal，可以这样创建OSD
+
+```
+ceph-deploy osd create --data /dev/vdb --block-db /dev/vdc --block-wal /dev/vdc node01
+```
+
 在Ceph Deploy节点，将Ceph相关配置文件拷贝至系统的/etc/ceph目录
 
 ```
@@ -189,105 +195,46 @@ systemctl start ceph-mon@node02.service
 ceph-deploy rgw create node01
 ```
 
-# 与OpenStack对接
+# 测试
 
-OpenStack支持与多个不同的Ceph资源池进行对接，通过cinder的volume type与backend进行对应，创建时只需要选择不同的volume type就可以实现指定资源池创建。配置OpenStack对接分为两个部分：
+## 块存储测试
 
-* Cinder配置：主要配置存储资源池与Volume Type和Backend对应关系
-* Libvirt配置：配置与Ceph之间的鉴权关系
+### 建立存储空间
 
-## Cinder配置
-
-其中rbd_secret_uuid可以使用uuidgen命令生成
-
-```
-# /etc/cinder/cinder.conf
-[DEFAULT]
-......
-# 与下面的段落对应
-enabled_backends = rbd-1, rbd-2
-......
-
-[rbd-1]
-volume_driver = cinder.volume.drivers.rbd.RBDDriver
-
-# 与上面的enabled_backends对应
-volume_backend_name = rbd-1
-
-rbd_pool = volumes
-
-# 需要从Ceph集群拷贝这两个配置文件到相应目录
-rbd_ceph_conf = /etc/ceph/ceph-1.conf
-rbd_keyring_conf = /etc/ceph/ceph.client.cinder1.keyring
-
-rbd_flatten_volume_from_snapshot = false
-rbd_max_clone_depth = 5
-rbd_store_chunk_size = 4
-rados_connect_timeout = 4
-rbd_user = admin
-rbd_secret_uuid = 5774b929-0690-4513-a1f7-41aac49cbb31
-report_discard_supported = True
-image_upload_use_cinder_backend = True
- 
-[rbd-2]
-volume_driver = cinder.volume.drivers.rbd.RBDDriver
-volume_backend_name = rbd-2
-rbd_pool = volumes
-rbd_ceph_conf = /etc/ceph/ceph-2.conf
-rbd_keyring_conf = /etc/ceph/ceph.client.cinder2.keyring
-rbd_flatten_volume_from_snapshot = false
-rbd_max_clone_depth = 5
-rbd_store_chunk_size = 4
-rados_connect_timeout = 4
-rbd_user = admin
-rbd_secret_uuid = 0563c419-bc4c-4794-972a-685498248869
-report_discard_supported = True
-image_upload_use_cinder_backend = True
-```
-
-## 建立与Volume Type对应关系
-
-```
-cinder type-create rbd-1
-cinder type-key rbd-1 set volume_backend_name=rbd-1
-cinder extra-specs-list
-
-cinder type-create rbd-2
-cinder type-key rbd-2 set volume_backend_name=rbd-2
-cinder extra-specs-list
-```
-
-## Libvirt配置
-
-在/etc/libvirt/secretes建立与上述rbd_secret_uuid同名的两个文件，后缀为.xml和.base64，两个文件的内容为
-
-```
-# 5774b929-0690-4513-a1f7-41aac49cbb31.xml
-<secret ephemeral='no' private='no'>
-  <uuid>5774b929-0690-4513-a1f7-41aac49cbb31</uuid>
-  <usage type='ceph'>
-    <name>client.cinder1 secret</name>
-  </usage>
-</secret>
-```
-
-其中base64文件的内容就是keyring文件中key的值
-
-```
-[client.admin]
-	key = AQB/E15f42WdABAAR32oTiidCbVGpwhYbWcKAw==
 ```
 
 ```
-# 5774b929-0690-4513-a1f7-41aac49cbb31.xml
-AQB/E15f42WdABAAR32oTiidCbVGpwhYbWcKAw==
+
+### 挂载使用
+
+## 文件系统测试
+
+
+### 建立存储空间
+
+```
+ceph osd pool create cephfs_data 16
+ceph osd pool create cephfs_metadata 16
+
+# ceph fs new <fs_name> <metadata> <data>
+ceph fs new cephfs cephfs_metadata cephfs_data
+ceph fs ls
 ```
 
-最后执行如下命令完成配置：
+### 内核方式挂载
 
 ```
-virsh secret-define --file 5774b929-0690-4513-a1f7-41aac49cbb31.xml
-virsh secret-set-value --secret 5774b929-0690-4513-a1f7-41aac49cbb31 --base64 $(cat 5774b929-0690-4513-a1f7-41aac49cbb31.base64)
-systemctl restart libvirtd
+mkdir -p /mnt/mycephfs
+mount -t ceph 192.168.10.11:6789:/ /mnt/mycephfs -o name=admin,secretfile=/etc/ceph/admin.secret
 ```
 
+### Fuse方式挂载
+
+确保/etc/ceph下面已经拷贝了ceph.conf和keyring文件
+
+```
+mkdir -p /mnt/mycephfs
+ceph-fuse -m 192.168.10.11:6789 /mnt/mycephfs
+```
+
+## 对象存储测试

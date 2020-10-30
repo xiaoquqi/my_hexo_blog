@@ -1,7 +1,8 @@
 title: 使用Kolla部署OpenStack Stein版本
 author: 孙琦(Ray)
-date: 2020-09-23 19:08:25
-tags:
+tags: []
+categories: []
+date: 2020-10-30 22:15:00
 ---
 开源版本的OpenStack+Ceph的组合已经日趋稳定，所以搭建一朵私有云环境的难度在逐步降低。当然OpenStack安装问题其实一直没有得到有效的解决，学习曲线非常陡峭。本文主要介绍基于Kolla项目使用容器化快速部署OpenStack方法，该部署方法已经在内部环境得到了多次验证，安装简便容易维护。
 

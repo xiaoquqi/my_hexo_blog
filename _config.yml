@@ -134,7 +134,7 @@ theme_config:
     
     # subNav-子导航
     subNav:
-      github: "https://github.com/xiaoquqi"
+      #github: "https://github.com/xiaoquqi"
       #gitee: "#" # 码云
       #jianshu: "#" #简书
       #cnblog: "#"
@@ -149,7 +149,7 @@ theme_config:
       #segmentfault: "#"
       #bilibili: "#"
       #acfun: "#"
-      mail: "mailto:xiaoquqi@gmail.com"
+      #mail: "mailto:xiaoquqi@gmail.com"
       #facebook: "#"
       #google: "#"
       #twitter: "#"
@@ -161,7 +161,7 @@ theme_config:
       ## `global` 0: 分开设置, 1: 全局启用, 2: 全局关闭
       global: 2
       # SubNav-导航
-      subNav: true
+      subNav: false
     
     # RSS订阅(关于如何配置启用:https://www.jianshu.com/p/2aaac7a19736)
     rss: /atom.xml
@@ -250,7 +250,7 @@ theme_config:
       enable: false  # 是否启用码云评论系统
       # 是否使用官方js(false可以提升访问速度)
       remote: false
-      redirect_uri: 'https://xiaoquqi.github.io'   # 应用回调地址(请和配置的第三方应用保持一致)
+      redirect_uri: 'http://sunqi.site'   # 应用回调地址(请和配置的第三方应用保持一致)
       # 不能更改(网上开源项目`https://github.com/Rob--W/cors-anywhere`作者提供的专门用来跨域服务器的配置)
       oauth_uri: https://cors-anywhere.herokuapp.com/https://gitee.com/oauth/token
       giteeID: 'xiaoquqi'  # 你的码云账号英文名
@@ -389,7 +389,7 @@ theme_config:
     smart_menu:
       innerArchive: '所有文章'
       friends: false
-      aboutme: '关于我'
+      aboutme: false
     
     # 友情链接
     friends:

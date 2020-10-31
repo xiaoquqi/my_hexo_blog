@@ -3,7 +3,7 @@ date: 2019-12-18 10:04:16
 ---
 ### 个人简介
 
-* 万博智云信息科技（上海）有限公司首席技术官(CTO), 万博智云是万国数据(NASDAQ:GDS)合资子公司
+* 万博智云信息科技（上海）有限公司联合创始人&首席技术官(CTO), 万博智云是万国数据(NASDAQ:GDS)合资子公司, 2020年获得软银中国投资
 * 阿里云解决方案领域MVP, 腾讯云TVP
 * AWS DevOps Professional认证
 * Ceph中国社区联合创始人,Ceph基金会亚太区大使
@@ -56,6 +56,8 @@ date: 2019-12-18 10:04:16
 
 ### 演讲视频
 
+* 2020年10月 参与阿里云工作台共建直播分享
+* 2020年10月 [腾讯云大学TVP十日谈——云原生趋势下的迁移与容灾](https://cloud.tencent.com/edu/learning/live-3165)
 * 2020年04月 [阿里云MVP线上峰会演讲：基于阿里云原生构建迁移即服务](https://developer.aliyun.com/live/2483)
 * 2016年08月 [Ceph亚太峰会(APAC)，作为Ceph中国社区代表发表演讲](http://v.youku.com/v_show/id_XMTc2Mzg5OTAzMg==.html?spm=a2h1n.8251843.playList.5!3~1!2~3~A.Nn4DGY&f=28412957&o=0#paction)
 * 2015年07月 [CDA数据分析俱乐部第二十期北京线下交流活动](http://bbs.pinggu.org/thread-3810898-1-1.html)分享嘉宾

@@ -1,6 +1,8 @@
 title: 使用Kolla部署OpenStack Stein版本
 author: 孙琦(Ray)
-tags: []
+tags:
+  - OpenStack
+  - 云计算
 categories: []
 date: 2020-10-30 22:15:00
 ---

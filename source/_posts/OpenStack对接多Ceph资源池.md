@@ -1,7 +1,11 @@
 title: OpenStack对接多Ceph资源池
 author: 孙琦(Ray)
-date: 2020-09-14 16:52:36
 tags:
+  - OpenStack
+  - Ceph
+  - 云计算
+categories: []
+date: 2020-09-14 16:52:00
 ---
 OpenStack支持与多个不同的Ceph资源池进行对接，通过cinder的volume type与backend进行对应，创建时只需要选择不同的volume type就可以实现指定资源池创建。配置OpenStack对接分为两个部分：
 

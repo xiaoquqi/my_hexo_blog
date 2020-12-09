@@ -273,6 +273,10 @@ cd /root/ceph
 export CEPH_DEPLOY_REPO_URL=https://mirrors.aliyun.com/ceph/rpm-octopus/el7
 export CEPH_DEPLOY_GPG_URL=https://mirrors.aliyun.com/ceph/keys/release.asc
 
+# 如果阿里源无法使用，可以使用163源，并且可以通过指定rpm-octopus，指定安装的Ceph版本
+#export CEPH_DEPLOY_REPO_URL=https://mirrors.163.com/ceph/rpm-octopus/el7
+#export CEPH_DEPLOY_GPG_URL=https://mirrors.163.com/ceph/keys/release.asc
+
 # 集群初始化，这一步会生成初始化的ceph.conf，可以配置网络等信息
 #
 # 如果cluster-network和public-network需要分开，可以这样定义：
@@ -287,11 +291,15 @@ ceph-deploy admin compute201 compute202 compute203 compute204
 
 ceph-deploy mgr create compute201
 
-# 需要根据实际情况修改，这里模拟的是将RocksDB存放至单独的SSD磁盘，相当于之前的Journal，所以没必要分别指定block-db和block-wal，默认在一起即可，一起指定报错
-ceph-deploy osd create --data /dev/vdc --block-db /dev/vdb compute201
-ceph-deploy osd create --data /dev/vdc --block-db /dev/vdb compute202
-ceph-deploy osd create --data /dev/vdc --block-db /dev/vdb compute203
-ceph-deploy osd create --data /dev/vdc --block-db /dev/vdb compute204
+# 需要根据实际情况修改，这里模拟的是将RocksDB存放至单独的SSD磁盘，目前文档中并没有特别指出这部分的分配比例，所以DB和WAL都是分配10G，写入的基本顺序为WAL -> DB -> DATA
+
+pvcreate /dev/vdb
+vgcreate ceph-pool /dev/vdb
+
+# 每个OSD分配
+lvcreate -n osd0.wal -L 10G ceph-pool
+lvcreate -n osd0.db -L 10G ceph-pool
+ceph-deploy osd create --data /dev/vdd --block-db ceph-pool/osd0.db --block-wal ceph-pool/osd0.wal compute201
 
 # 检查集群状态
 ceph -s
@@ -303,7 +311,7 @@ ceph -s
 
 ```
 ceph osd pool create images 128
-ceph auth get-or-create client.glance mon 'allow r' osd 'allow class-read object_prefix rdb_children, allow rwx pool=images' -o /etc/ceph/ceph.client.glance.keyring
+ceph auth get-or-create client.glance mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=images' -o /etc/ceph/ceph.client.glance.keyring
 
 ceph osd pool create volumes 128
 ceph auth get-or-create client.cinder mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=volumes, allow rx pool=images' -o /etc/ceph/ceph.client.cinder.keyring
@@ -314,6 +322,8 @@ ceph auth get-or-create client.cinder-backup mon 'allow r' osd 'allow class-read
 ceph osd pool create vms 128
 ceph auth get-or-create client.nova mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=vms, allow rx pool=images' -o /etc/ceph/ceph.client.nova.keyring
 ```
+
+注意：
 
 ## 3.3 OpenStack部署
 
@@ -398,8 +408,8 @@ cinder_rbd_secret_uuid是在passwords.yml中生成的。
 
 ```
 mkdir -p /etc/kolla/config/cinder
-mkdir -p /etc/kolla/config/cinder-volume
-mkdir -p /etc/kolla/config/cinder-backup
+mkdir -p /etc/kolla/config/cinder/cinder-volume
+mkdir -p /etc/kolla/config/cinder/cinder-backup
 
 export cinder_rbd_secret_uuid=$(grep cinder_rbd_secret_uuid /etc/kolla/passwords.yml | awk '{print $2}')
 

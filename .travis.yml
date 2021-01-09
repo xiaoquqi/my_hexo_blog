@@ -12,7 +12,7 @@ before_install:
   - cp -rf my_themes/yilia-plus/layout/_partial/footer.ejs themes/yilia-plus/layout/_partial/footer.ejs
 after_success:
   - cloudbase login --apiKeyId $TECENT_AK --apiKey $TECENT_KS
-  - cd public && tcb hosting deploy -e sunqi-site-7gue3m8k5fbec136
+  - cd public && tcb hosting deploy -e sunqi-site-7gue3m8k5fbec136 --force
 script:
   - hexo generate # generate static files
   - echo "sunqi.me" > public/CNAME

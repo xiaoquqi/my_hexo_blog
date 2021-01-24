@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 孙琦的技术人生
+title: 老孙正经胡说
 subtitle: ''
 description: ''
 keywords:
@@ -131,6 +131,13 @@ theme_config:
     menu:
       主页: /
       关于我: /about
+      趋势分析: /tags/趋势分析/
+      公有云: /tags/公有云/
+      容器: /tags/容器/
+      OpenStack: /tags/OpenStack/
+      Ceph: /tags/Ceph/
+      DevOps: /tags/DevOps/
+      常用命令: /tags/常用笔记/
     
     # subNav-子导航
     subNav:

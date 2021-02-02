@@ -59,13 +59,13 @@ git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$H
 替换默认的zsh主题
 
 ```
-sed -i "s/^ZSH_THEME=.*/ZSH_THEME=\"powerlevel10k\/powerlevel10k\"/g" $HOME/.zshrc
+sed -i '' "s/^ZSH_THEME=.*/ZSH_THEME=\"powerlevel10k\/powerlevel10k\"/g" $HOME/.zshrc
 ```
 
 在正式启用主题前，还需要对powerlevel下载字体的文件进行优化。由于是从github下载字体，所以powerlevel10k配置一定会失败，必须要进行替换后，才能安装正常。
 
 ```
-sed -i "s#^local -r font_base_url=.*#local -r font_base_url='https://xiaoquqi.coding.net/p/github/d/powerlevel10k-media/git/raw/master'#g" $HOME/.oh-my-zsh/custom/themes/powerlevel10k/internal/wizard.zsh
+sed -i '' "s#^local -r font_base_url=.*#local -r font_base_url='https://xiaoquqi.coding.net/p/github/d/powerlevel10k-media/git/raw/master'#g" $HOME/.oh-my-zsh/custom/themes/powerlevel10k/internal/wizard.zsh
 ```
 
 source zshrc会自动触发配置，按照向导和喜欢的样式来就好，这里就不再赘述了

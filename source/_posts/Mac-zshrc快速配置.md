@@ -43,8 +43,7 @@ git clone https://e.coding.net/xiaoquqi/github/ohmyzsh.git
 安装脚本在ohmyzsh/tools/install.sh中，这里我们通过环境变量设置本地源
 
 ```
-export REPO="github/ohmyzsh"
-export REMOTE="https://e.coding.net/xiaoquqi"
+export REMOTE=https://e.coding.net/xiaoquqi/github/ohmyzsh.git
 
 $WORKSPACE/ohmyzsh/tools/install.sh
 ```

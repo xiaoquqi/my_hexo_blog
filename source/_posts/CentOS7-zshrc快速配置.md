@@ -1,28 +1,45 @@
-title: Mac iTerm2 zshrc快速配置
+title: CentOS7 zshrc快速配置
 author: 孙琦(Ray)
-date: 2021-02-02 11:26:14
+date: 2021-02-02 17:15:02
 tags:
 ---
-zsh基本上已经成为Mac上的标配了，界面美观还有点缀的小图标，非常漂亮。但是网上配置zsh文章很多，配置方法也是五花八门，并且由于github被墙的原因，经过由于网络问题安装失败。经过反复测试，在国内的代码托管网站进行了Github部分关键项目定时缓存后，提高配置效率。这里写一篇自用的配置方法，留给有需要的人。
+大部分时间里，我还是习惯于ssh到远程的CentOS7服务器上工作，因为Mac配置了漂亮zsh的缘故，所以也想把我的CentOS7切换到zsh模式。这是最终配置好的效果：
 
-我的环境：iTerm2 + oh-my-zsh + powerlevel10k，这是我的配置效果：
+![upload successful](/images/pasted-124.png)
 
-![upload successful](/images/pasted-123.png)
+原理部分不再赘述，有兴趣可以参照MacOS的zsh配置篇。
+
+CentOS7配置zsh与Mac上还是有一定区别的，因为版本要求，zsh需要自己安装编译，字体也需要自己安装，接下来是详细的步骤。
 
 <!-- more -->
 
-# 原理解析
+# 安装zsh
 
-我们开始配置前，还是有必要讲一下这几个项目的关系，以便了解其工作原理。
+虽然通过yum方式可以安装zsh，但是无法满足powerlevel10k的要求，所以先使用zsh源码进行编译后安装。
 
-* iTerm2不用说了，MacOS上必备的Terminal工具，替代原有系统自带的工具。
-* ohmyzsh(https://github.com/ohmyzsh/ohmyzsh/) 是一套基于zsh深度定制的插件及主题管理的框架，方便定制适合你的zsh环境。
-* Nerd Fonts(https://www.nerdfonts.com/) 我们在截图中看到的那些可爱的小图标就是来自这个项目，让我们原本枯燥的Terminal增添了几分乐趣。
-* powerlevel10k(https://github.com/romkatv/powerlevel10k) 是一套zsh皮肤，也是目前我个人比较喜欢的一套皮肤，同时提供了较强的配置能力，包括字体下载，iTerm2的配置都自动完成了，所以也是目前使用最顺手的一套皮肤。
+```
+WORKSPACE=$HOME/workspace/zsh
+mkdir -p $WORKSPACE
+
+cd $WORKSPACE
+curl -o zsh.tar.xz https://jaist.dl.sourceforge.net/project/zsh/zsh/5.8/zsh-5.8.tar.xz
+tar -xvf zsh-5.8.tar.xz
+
+cd zsh
+make
+make install
+```
+
+zsh会安装在用户目录中/usr/local/bin/zsh中，将zsh设置为默认的系统shell，配置成功后，需要关闭Terminal重新登陆。
+
+```
+chsh -s /usr/local/bin/zsh
+```
 
 ## 安装流程
 
-由于以上各个项目帮我们做了大量的优化，所以让zsh的安装过程变得简单了很多，大体的流程为：
+接下来的流程与MacOS上安装类似，由于以上各个项目帮我们做了大量的优化，所以让zsh的安装过程变得简单了很多，大体的流程为：
+
 * 安装oh-my-zsh，其实就是clone回来
 * 安装powerlevel10k，其实也是clone回来
 * powerlevel10k的基本配置，根据我们喜欢进行定制

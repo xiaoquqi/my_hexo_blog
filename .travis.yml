@@ -10,6 +10,7 @@ before_install:
   - npm i -g @cloudbase/cli
   - git clone --depth=1 https://github.com/JoeyBling/hexo-theme-yilia-plus.git themes/yilia-plus
   - cp -rf my_themes/yilia-plus/layout/_partial/footer.ejs themes/yilia-plus/layout/_partial/footer.ejs
+  - cp -rf my_themes/yilia-plus/layout/_partial/google-analytics.ejs themes/yilia-plus/layout/_partial/google-analytics.ejs
 after_success:
   - cloudbase login --apiKeyId $TECENT_AK --apiKey $TECENT_KS
   - cd public && echo 'y' | tcb hosting deploy -e sunqi-site-7gue3m8k5fbec136

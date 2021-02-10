@@ -12,7 +12,7 @@ tags:
 HyperMotion SaaS是部署在阿里云Kubernetes托管版集群中，即Kubernetes Master节点由阿里云负责，阿里云为我们在指定VPC内启动了两台ECS实例作为Worker节点。在我们自身需求中，需要解决两个流量问题：
 
 * 控制流：HyperMotion SaaS每个租户可以添加指定的目标云平台，HyperMotion SaaS后台模块通过VPC关联的NAT网关访问云平台API接口及资源，但是如果添加的是我们内部的OpenStack，则需要SaaS侧与OpenStack控制网络想通；另外HyperMotion会自动利用云平台的云主机资源安装云存储网关，所以也需要访问OpenStack Floating IP的地址（具体看云平台规划，也许是Fixed IP）。
-* 数据流：在数据层面上，我们仍然希望数据层面通过内网传输，没有必要将数据流入公网，好再HyperMotion SaaS的设计满足了这样的需求
+* 数据流：在数据层面上，我们仍然希望数据层面通过内网传输，没有必要将数据流入公网，好在HyperMotion SaaS的设计满足了这样的需求
 
 ![upload successful](/images/pasted-133.png)
 
@@ -90,7 +90,7 @@ IKE是因特网密钥交换的缩写(Internet Key Exchange)，从名字上可以
 
 ![upload successful](/images/pasted-145.png)
 
-还有一个就是PFS的设置，和IKE的DH组是一样的，在阿里云侧也被成为IPsec的DH组。也必须设置一致。
+还有一个就是PFS的设置，和IKE的DH组是一样的，在阿里云侧也被称为IPsec的DH组。也必须设置一致。
 
 ![upload successful](/images/pasted-146.png)
 
@@ -134,7 +134,7 @@ IKE是因特网密钥交换的缩写(Internet Key Exchange)，从名字上可以
 
 # 4、设置路由
 
-我们此此设置路由的目的是为了阿里云侧能够访问我们内网，所以接下来需要在阿里云VPC内设置路由表，当访问我们的内网时，需要使用VPN网关。进入VPC服务的路由表配置中，找到VPC。将目标IP段吓一跳设置为VPN网关。因为阿里云的ACL还处于内测阶段，所以暂时无须考虑ACL的设定。
+我们次此设置路由的目的是为了阿里云侧能够访问我们内网，所以接下来需要在阿里云VPC内设置路由表，当访问我们的内网时，需要使用VPN网关。进入VPC服务的路由表配置中，找到VPC。将目标IP段吓一跳设置为VPN网关。因为阿里云的ACL还处于内测阶段，所以暂时无须考虑ACL的设定。
 
 ![upload successful](/images/pasted-154.png)
 

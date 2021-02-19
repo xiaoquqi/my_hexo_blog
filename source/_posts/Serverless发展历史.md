@@ -58,29 +58,19 @@ Heroku这家公司想必早期写博客的朋友都不会感到陌生，在那�
 
 2012年10月，时任Iron.io BD副总裁的Ken Fromm在ReadWrite网站(互联网科技博客)上发表了一篇名为《Why The Future Of Software And Apps Is Serverless》的文章，完整的阐述了对Serverless架构的构想，其中开篇的第一句话就是：
 
-```
-Even with the rise of cloud computing, the world still revolves around servers. That won’t last, though. Cloud apps are moving into a serverless world, and that will bring big implications for the creation and distribution of software and applications.
-```
+> Even with the rise of cloud computing, the world still revolves around servers. That won’t last, though. Cloud apps are moving into a serverless world, and that will bring big implications for the creation and distribution of software and applications.
 
 ThoughWorks提出了对Serverless架构的定义：
 
-```
-A serverless architecture approach replaces long-running virtual machines with ephemeral compute power that comes into existence on request and disappears immediately after use.
-```
+> A serverless architecture approach replaces long-running virtual machines with ephemeral compute power that comes into existence on request and disappears immediately after use.
 
-```
-Serverless架构使用临时计算资源替代原有常态化运行的虚拟机，当有请求时资源存在，请求结束后资源自动销毁。
-```
+> Serverless架构使用临时计算资源替代原有常态化运行的虚拟机，当有请求时资源存在，请求结束后资源自动销毁。
 
 也许你觉得太复杂了，我们来看看Techopedia网站上对Serverless的定义：
 
-```
-Serverless computing is a type of cloud computing where the customer does not have to provision servers for the back-end code to run on, but accesses services as they are needed. Instead, the cloud provider starts and stops a container platform as a service as requests come in and the provider bills accordingly.
-```
+> Serverless computing is a type of cloud computing where the customer does not have to provision servers for the back-end code to run on, but accesses services as they are needed. Instead, the cloud provider starts and stops a container platform as a service as requests come in and the provider bills accordingly.
 
-```
-Serverless是云计算服务的一种，用户只需要将提供服务的代码运行在云上，而无须实现其他后端服务。云商根据访问情况，启动或者停止容器来提供服务，用户只需要根据实际消费付费。
-```
+> Serverless是云计算服务的一种，用户只需要将提供服务的代码运行在云上，而无须实现其他后端服务。云商根据访问情况，启动或者停止容器来提供服务，用户只需要根据实际消费付费。
 
 如果你还认为复杂，可以简单的将Serverless理解为“基于事件驱动的计算服务”。
 

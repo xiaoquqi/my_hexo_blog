@@ -1,7 +1,8 @@
 title: AWS Serverless现状与发展趋势
 author: 孙琦(Ray)
-date: 2021-02-11 15:17:12
-tags:
+tags: []
+categories: []
+date: 2021-02-21 07:30:00
 ---
 Serverless架构是最近一直非常关注的技术方向，基础架构在应用构建中的地位被被进一步弱化的趋势不可逆转。Serveless让开发者更加关注业务本身逻辑的特性决定了技术演进的趋势。
 
@@ -45,9 +46,13 @@ Step Functions通过状态机的定义，很好的让多个函数计算有序运
 
 ## 数据存储
 
-在持久化数据方面，
+在任何应用场景下，数据都是用户最宝贵的资源，特别是在当今社会下，数据被供奉在一个前所未有的高度。在与Lambda配合使用的持久化存储方面，除了常规的对象存储和非关系型数据库，还支持了RDS Proxy和Aurora Serverless。
 
 ![upload successful](/images/pasted-179.png)
+
+RDS Proxy主要解决并发访问RDS数据库连接数量的限制，由于函数计算随时启停的特点，无法像我们在开发传统应用时使用统一的数据库连接资源池来控制数据库的访问连接数。当并发量非常大时，会超过最大连接数导致失败的情况，所以RDS Proxy就是专门用于解决这一问题的服务。
+
+![upload successful](/images/pasted-182.png)
 
 
 # 函数服务Lambda

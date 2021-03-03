@@ -1,7 +1,9 @@
 title: CentOS 7和Docker初始化安装
 author: 孙琦(Ray)
-date: 2020-07-31 09:34:49
 tags:
+  - 常用命令
+categories: []
+date: 2020-07-31 09:34:00
 ---
 # CentOS 7初始化
 

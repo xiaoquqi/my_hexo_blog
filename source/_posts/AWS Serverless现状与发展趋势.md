@@ -1,6 +1,7 @@
 title: AWS Serverless现状与发展趋势
 author: 孙琦(Ray)
-tags: []
+tags:
+  - Serverless
 categories: []
 date: 2021-02-21 07:30:00
 ---

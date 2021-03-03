@@ -1,7 +1,9 @@
 title: CentOS7 zshrc快速配置
 author: 孙琦(Ray)
-date: 2021-02-02 17:15:02
 tags:
+  - 常用命令
+categories: []
+date: 2021-02-02 17:15:00
 ---
 大部分时间里，我还是习惯于ssh到远程的CentOS7服务器上工作，因为Mac配置了漂亮zsh的缘故，所以也想把我的CentOS7切换到zsh模式。这是最终配置好的效果：
 

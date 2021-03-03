@@ -131,13 +131,9 @@ theme_config:
     menu:
       主页: /
       关于我: /about
+      Serverless: /tags/Serverless/
       趋势分析: /tags/趋势分析/
-      公有云: /tags/公有云/
-      容器: /tags/容器/
-      OpenStack: /tags/OpenStack/
-      Ceph: /tags/Ceph/
-      DevOps: /tags/DevOps/
-      常用命令: /tags/常用笔记/
+      常用命令: /tags/常用命令/
     
     # subNav-子导航
     subNav:

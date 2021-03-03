@@ -1,6 +1,7 @@
 title: 传统应用架构与Serverless架构总体拥有成本(TCO)分析与比较
 author: 孙琦(Ray)
-tags: []
+tags:
+  - Serverless
 categories: []
 date: 2021-02-10 21:55:00
 ---

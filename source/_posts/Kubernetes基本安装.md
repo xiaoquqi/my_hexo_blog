@@ -1,7 +1,9 @@
 title: Kubernetes All-in-One环境安装
 author: 孙琦(Ray)
-date: 2020-07-31 09:38:24
 tags:
+  - 常用命令
+categories: []
+date: 2020-07-31 09:38:00
 ---
 # Kubernetes安装及初始化
 

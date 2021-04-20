@@ -24,6 +24,8 @@ tags:
 
 ![upload successful](/images/pasted-210.png)
 
+另外我发现，虽然每一家云商对于Serverless概念定义主要还是从函数计算维度出发，但是从开发者社区推送的一些文章来看，对于使用Serverless方式构建的K8S往往也归纳到这个范畴内。所以后面我也会尝试分享一下我们自身SaaS部署过程中，对于Serverless的K8S的尝试和一些心得。
+
 # 函数服务
 
 从2020年到2021年，阿里云函数服务还是发生了很大的变化，与2020年相比，有不少好的功能增强。
@@ -39,6 +41,10 @@ tags:
 ![upload successful](/images/pasted-212.png)
 
 ![upload successful](/images/pasted-213.png)
+
+以云监控触发器为例，比如你的ECS由人为引起了重启，你可以触发你的函数计算去处理自动化运维操作。通过云监控中的事件进行触发配置，不过这里不太方便的一点，新的几个触发器配置起来都不太方便，都需要通过查询文档才能知道跳转到哪个平台进行关联性配置，用户体验方面有待提升。
+
+![upload successful](/images/pasted-221.png)
 
 
 

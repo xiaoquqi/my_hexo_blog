@@ -111,15 +111,17 @@ kubeadm init --pod-network-cidr=10.244.0.0/16 --image-repository registry.aliyun
 # Then you can join any number of worker nodes by running the following on each as root:
 # kubeadm join 192.168.10.111:6443 --token 1odaru.0by05advhbu7edgt \
 #     --discovery-token-ca-cert-hash sha256:3efb71c40cce36c5ed90fc8b5831233aba06eec26576088e8e7a7a892d272776
+
  
-# Step3 flannel Network
-sysctl net.bridge.bridge-nf-call-iptables=1
-kubectl apply -f https://gitee.com/xiaoquqi/flannel/raw/master/Documentation/kube-flannel.yml
- 
-# Step4 To use cluster
+# Step3 To use cluster
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+ 
+# Step4 flannel Network
+sysctl net.bridge.bridge-nf-call-iptables=1
+kubectl apply -f https://gitee.com/xiaoquqi/flannel/raw/master/Documentation/kube-flannel.yml
+
 ```
 
 # 允许Master节点运行Pods

@@ -102,3 +102,7 @@ NAS分为通用型和极速型，这里我们分别选择容量型和性能型�
 最后，通过点击任务详情，查看日志，查看任务详情。
 
 ![upload successful](/images/pasted-260.png)
+
+# 总结
+
+使用Kubernetes Serverless特别适合按需使用的场景，配合各种资源包，能够大幅度降低成本，同时做到高并发。相关代码已经托管到github上，有兴趣的朋友可以一起共同完善，我的github名称是xiaoquqi。
